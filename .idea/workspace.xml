@@ -2,36 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5041c4a1-e67b-4084-b875-0a5b8cbdb124" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/billboard_scraper/billboard_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/billboard_scraper/billboard_scraper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-01-04_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-01-11_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-01-18_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-01-25_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-02-01_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-02-08_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-02-15_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-02-22_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-02-29_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-03-07_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-03-14_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-03-21_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-03-28_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-04-04_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-04-11_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-04-18_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-04-25_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-05-02_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-05-09_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-05-16_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-05-23_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-05-30_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-06-06_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-06-13_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-06-20_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-06-27_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/2020-06-28_billboard-200.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/billboard_scraper/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/billboard_scraper/log.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,6 +66,7 @@
       <workItem from="1618080404951" duration="232000" />
       <workItem from="1618081359142" duration="33000" />
       <workItem from="1618123220235" duration="900000" />
+      <workItem from="1618467445374" duration="1540000" />
     </task>
     <servers />
   </component>
@@ -110,8 +83,9 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/progetto$billboard_scraper.coverage" NAME="billboard_scraper Coverage Results" MODIFIED="1618124059971" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/billboard_scraper" />
+    <SUITE FILE_PATH="coverage/progetto$billboard_scraper.coverage" NAME="billboard_scraper Coverage Results" MODIFIED="1618468521283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/billboard_scraper" />
   </component>
 </project>
