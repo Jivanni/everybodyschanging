@@ -2,12 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5041c4a1-e67b-4084-b875-0a5b8cbdb124" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/top40_scraper/top40_scraper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billboard_scraper/billboard_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/billboard_scraper/billboard_scraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billboard_scraper/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/billboard_scraper/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spotify_charts_scraper/Spotify-Charts-Scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/spotify_charts_scraper/Spotify-Charts-Scraper.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,7 +36,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.top40_scraper">
     <configuration name="billboard_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="progetto" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -48,8 +59,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="top40_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="progetto" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/top40_scraper" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/top40_scraper/top40_scraper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.top40_scraper" />
         <item itemvalue="Python.billboard_scraper" />
       </list>
     </recent_temporary>
@@ -67,6 +101,10 @@
       <workItem from="1618123220235" duration="900000" />
       <workItem from="1618467445374" duration="1540000" />
       <workItem from="1618470080475" duration="590000" />
+      <workItem from="1618470847248" duration="116000" />
+      <workItem from="1618496767769" duration="825000" />
+      <workItem from="1618500118167" duration="2178000" />
+      <workItem from="1618502693446" duration="9575000" />
     </task>
     <servers />
   </component>
@@ -86,6 +124,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/progetto$billboard_scraper.coverage" NAME="billboard_scraper Coverage Results" MODIFIED="1618468521283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/billboard_scraper" />
+    <SUITE FILE_PATH="coverage/progetto$top40_scraper.coverage" NAME="top40_scraper Coverage Results" MODIFIED="1618512178461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/top40_scraper" />
+    <SUITE FILE_PATH="coverage/progetto$billboard_scraper.coverage" NAME="billboard_scraper Coverage Results" MODIFIED="1618497000133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/billboard_scraper" />
   </component>
 </project>

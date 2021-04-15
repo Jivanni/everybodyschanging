@@ -126,7 +126,7 @@ def get_url_time_period(date_period):
 
 
 def save_csv(df):
-    with open('output.csv', 'w') as f:
+    with open('output.csv', 'w', encoding='utf-8') as f:
         df.to_csv(f, index=False)
 
 

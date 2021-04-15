@@ -188,7 +188,7 @@ import os
 
 #requires https://github.com/guoguo12/billboard-charts
 
-CHART_NAME = 'billboard-global-200'
+CHART_NAME = 'italy-digital-song-sales'
 START_DATE = '2020-06-28'
 END_DATE = '2021-01-01' #starts downloading weekly charts from END_DATE backwards to START_DATE
 DOWNLOAD_DIR = "downloads"
@@ -206,7 +206,7 @@ while date.fromisoformat(curr) >= start:
 	curr_chart = billboard.ChartData(CHART_NAME, curr)
 	csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + curr + "_" + CHART_NAME + ".csv"
 
-	with open(csv_filename, "w", newline='') as file_handler:
+	with open(csv_filename, "w", newline='', encoding='utf-8') as file_handler:
 		writer = csv.writer(file_handler, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
 		writer.writerow(FIELD_NAMES)
 		for song in curr_chart:
