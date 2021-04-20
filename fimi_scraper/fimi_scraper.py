@@ -52,7 +52,7 @@ def get_html(url : str) -> BeautifulSoup:
     -------
     BeautifulSoup() object
     """
-    driver.get(URL)
+    driver.get(url)
     time.sleep(3)
     page_source=driver.page_source
     return BeautifulSoup(page_source, 'html.parser')
@@ -103,7 +103,9 @@ if __name__ == "__main__":
             csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{year}-{week}" + "_" + CHART_NAME + ".csv"
             soup = get_html(chart_url)
             songs_data = get_songs(soup)
-
+            if not songs_data:
+                logging.warning(f"end of year {year}")
+                break
             if VERBOSE:
                 print(current_date)
 
@@ -125,6 +127,7 @@ if __name__ == "__main__":
 
             week += 1
         year += 1
+        week = 1
     driver.quit()
         # ==================================================================================================================
 
