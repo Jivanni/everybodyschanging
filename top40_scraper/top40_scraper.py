@@ -1,13 +1,20 @@
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 from unidecode import unidecode
-
 import requests
+
+import logging
+
 import csv
 from datetime import date
 import os
 
 from typing import List
+
+logging.basicConfig(format='%(levelname)s\t%(message)s',
+                    filename="parsing.log",
+                    filemode="w",
+                    level=logging.INFO)
 
 CHART_CODE = 18
 VERBOSE = True
@@ -74,11 +81,16 @@ if __name__ == "__main__":
     unique_songs = []
 
     # Parse from start date to end date
+    # fromisoformat must stay here since in other parts of the script is used as a string
     while date.fromisoformat(current_date) <= end:
         chart_url = URL + current_date
         csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + current_date + "_" + CHART_NAME + ".csv"
         html = get_html(chart_url)  # download the html file
-        data = get_songs(html)  # retrieve the songs on the html
+        try:
+            data = get_songs(html)  # retrieve the songs on the html
+        except TypeError:
+            logging.warning(f"{current_date} not parsed")
+            continue
 
         if VERBOSE:
             print(current_date)
@@ -87,7 +99,7 @@ if __name__ == "__main__":
             writer = csv.writer(file_handler, delimiter=';',
                                 quotechar='"', quoting=csv.QUOTE_ALL)
             writer.writerow(FIELD_NAMES)
-            for rank, song, artist, *_ in data:
+            for rank, song, artist in data:
                 writer.writerow([rank, song, artist])
 
                 # Create of all the unique songs in all the charts
@@ -96,8 +108,7 @@ if __name__ == "__main__":
 
                 if VERBOSE:
                     print(f"\t{song}\t{artist}")
-        with open("log.txt", "a+") as logfile:
-            logfile.write("\n" + current_date)
+        logging.info(f"Parsing {current_date}")
 
         current_date = next_date
     # ==================================================================================================================
@@ -105,6 +116,7 @@ if __name__ == "__main__":
     if VERBOSE:
         print("Now I'm saving all distinct songs")
     # Save unique songs in a file
-    with open("unique_songs.txt", "a+") as unique_file:
+    with open("unique_songs.txt", "w") as unique_file:
+        unique_file.write("artists;song")
         for song in tqdm(unique_songs):
             unique_file.write("\n" + song)
