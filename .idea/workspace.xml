@@ -1,271 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5041c4a1-e67b-4084-b875-0a5b8cbdb124" name="Default Changelist" comment="minor changes">
+    <list default="true" id="5041c4a1-e67b-4084-b875-0a5b8cbdb124" name="Default Changelist" comment="spotify audio feature download">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/billboard_scraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-01-04_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-01-11_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-01-18_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-01-25_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-02-01_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-02-08_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-02-15_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-02-22_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-02-29_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-03-07_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-03-14_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-03-21_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-03-28_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-04-04_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-04-11_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-04-18_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-04-25_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-05-02_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-05-09_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-05-16_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-05-23_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-05-30_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-06-06_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-06-13_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-06-20_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-06-27_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-200/2020-06-28_billboard-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-01-05_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-01-12_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-01-19_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-01-26_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-02-02_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-02-09_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-02-16_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-02-23_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-03-01_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-03-08_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-03-15_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-03-22_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-03-29_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-04-05_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-04-12_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-04-19_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-04-26_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-05-03_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-05-10_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-05-17_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-05-24_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-05-31_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-06-07_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-06-14_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-06-21_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-06-28_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-07-03_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-07-10_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-07-17_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-07-24_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-07-31_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-08-07_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-08-14_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-08-21_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-08-28_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-09-04_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-09-11_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-09-18_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-09-25_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-10-02_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-10-09_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-10-16_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-10-23_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-10-30_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-11-06_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-11-13_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-11-20_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-11-27_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-12-04_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-12-11_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-12-18_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/billboard-global-200/2020-12-25_billboard-global-200.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-07-03_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-07-10_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-07-17_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-07-24_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-07-31_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-08-07_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-08-14_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-08-21_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-08-28_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-09-04_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-09-11_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-09-18_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-09-25_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-10-02_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-10-09_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-10-16_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-10-23_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-10-30_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-11-06_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-11-13_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-11-20_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-11-27_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-12-04_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-12-11_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-12-18_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2020-12-25_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-albums/2021-01-01_italy-albums.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-07-03_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-07-10_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-07-17_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-07-24_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-07-31_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-08-07_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-08-14_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-08-21_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-08-28_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-09-04_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-09-11_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-09-18_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-09-25_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-10-02_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-10-09_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-10-16_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-10-23_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-10-30_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-11-06_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-11-13_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-11-20_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-11-27_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-12-04_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-12-11_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-12-18_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2020-12-25_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/downloads/italy-digital-song-sales/2021-01-01_italy-digital-song-sales.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/billboard_scraper/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify_charts_scraper/Spotify-Charts-Scraper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify_charts_scraper/global.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spotify_charts_scraper/italy.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-11-15_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-11-22_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-11-29_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-12-06_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-12-13_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-12-20_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2018-12-27_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-01-03_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-01-10_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-01-17_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-01-24_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-01-31_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-02-07_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-02-14_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-02-21_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-02-28_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-03-07_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-03-14_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-03-21_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-03-28_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-04-04_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-04-11_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-04-18_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-04-25_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-05-02_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-05-09_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-05-16_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-05-23_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-05-30_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-06-06_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-06-13_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-06-20_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-06-27_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-07-04_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-07-11_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-07-18_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-07-25_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-08-01_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-08-08_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-08-15_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-08-22_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-08-29_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-09-05_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-09-12_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-09-19_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-09-26_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-10-03_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-10-10_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-10-17_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-10-24_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-10-31_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-11-07_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-11-14_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-11-21_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-11-28_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-12-05_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-12-12_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-12-19_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2019-12-26_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-01-02_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-01-09_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-01-16_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-01-23_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-01-30_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-02-06_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-02-13_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-02-20_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-02-27_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-03-05_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-03-12_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-03-19_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-03-26_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-04-02_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-04-09_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-04-16_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-04-23_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-04-30_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-05-07_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-05-14_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-05-21_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-05-28_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-06-04_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-06-11_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-06-18_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-06-25_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-07-02_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-07-09_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-07-16_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-07-23_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-07-30_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-08-06_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-08-13_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-08-20_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-08-27_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-09-03_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-09-10_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-09-17_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-09-24_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-10-01_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-10-08_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-10-15_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-10-22_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-10-29_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-11-05_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-11-12_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-11-19_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-11-26_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-12-03_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-12-10_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-12-17_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-12-24_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2020-12-31_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-01-07_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-01-14_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-01-21_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-01-28_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-02-04_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-02-11_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-02-18_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-02-25_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-03-04_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-03-11_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-03-18_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/downloads/italy_top_20/2021-03-25_italy_top_20.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/top40_scraper/top40_scraper.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +38,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/spotify_info/spotify_parser.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.externalTools" />
   </component>
   <component name="RunManager" selected="Python.spotify_parses">
     <configuration name="billboard_scraper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -420,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618923707203</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="spotify audio feature download">
+      <created>1618950310687</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950310687</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +186,8 @@
     <MESSAGE value="code cleaned, added unique song writer" />
     <MESSAGE value="added logging module" />
     <MESSAGE value="minor changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
+    <MESSAGE value="spotify audio feature download" />
+    <option name="LAST_COMMIT_MESSAGE" value="spotify audio feature download" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/progetto$top40_scraper.coverage" NAME="top40_scraper Coverage Results" MODIFIED="1618512178461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/top40_scraper" />
