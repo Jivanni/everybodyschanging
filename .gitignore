@@ -146,3 +146,10 @@ dmypy.json
 cython_debug/
 .idea/progetto.iml
 .idea/misc.xml
+fimi_scraper/.idea/workspace.xml
+fimi_scraper/.idea/vcs.xml
+fimi_scraper/.idea/modules.xml
+fimi_scraper/.idea/misc.xml
+fimi_scraper/.idea/inspectionProfiles/Project_Default.xml
+fimi_scraper/.idea/inspectionProfiles/profiles_settings.xml
+fimi_scraper/.idea/fimi_scraper.iml

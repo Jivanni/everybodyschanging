@@ -53,7 +53,7 @@ def get_html(url : str) -> BeautifulSoup:
     BeautifulSoup() object
     """
     driver.get(url)
-    time.sleep(3)
+    time.sleep(2)
     page_source=driver.page_source
     return BeautifulSoup(page_source, 'html.parser')
 
@@ -94,9 +94,9 @@ if __name__ == "__main__":
     unique_songs = []
 
     year = START_DATE
-    week = 1
 
     while year <= END_DATE:
+        week = 1
         while week <= 52:
             current_date = f"/{year}/{week}"
             chart_url = URL + current_date
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
             week += 1
         year += 1
-        week = 1
+
     driver.quit()
         # ==================================================================================================================
 
