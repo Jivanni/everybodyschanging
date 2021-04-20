@@ -116,7 +116,7 @@ if __name__ == "__main__":
     if VERBOSE:
         print("Now I'm saving all distinct songs")
     # Save unique songs in a file
-    with open("unique_songs.txt", "w") as unique_file:
+    with open("unique_songs.csv", "w") as unique_file:
         unique_file.write("artists;song")
         for song in tqdm(unique_songs):
             unique_file.write("\n" + song)
