@@ -1,11 +1,20 @@
-"""
-    Pippo pappo
+"""Spotify parser
+
+This script takes a csv file with ; as separator of a song and an artist
+and searches on spotify the song creating a csv with the features taken
+from spotify
+
+A file called spotify_keys.txt where both spotify keys must be stored.
+
+This script requires spotipy and tqdm to be installed
+
+This file is designed to run stand alone.
 """
 import csv
 import logging
 import mmap
 from string import punctuation
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -54,9 +63,19 @@ def get_num_lines(file_path: str) -> int:
     return lines - 1
 
 
-def get_song_features(track_features):
-    # Get the first track that match the query
+def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
+    """
+    This function takes part of the output of a track searched with spotify
+    and return a dictionary with some features extracted from the api
+    Parameters
+    ----------
+    track_features : Dict[str, Any]
 
+    Returns
+    -------
+    Dict[str, str]
+    """
+    # Get the first track that match the query
     album_id = track_features["album"]["id"]
     artists_names = [
         artist["name"]
@@ -88,7 +107,7 @@ def get_song_features(track_features):
 def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
     """
     This function takes a singer and the name of a track and returns
-    the spotify id for that particular track if he can find the track
+    the spotify features for that particular track if he can find the track
     otherwise it will return None
     Parameters
     ----------
@@ -97,7 +116,7 @@ def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
 
     Returns
     -------
-    Optional[str]
+    Optional[Dict[str, str]
         an id if it found the song, None otherwise
     """
     query = f'artist:{singer} track:{track}'
