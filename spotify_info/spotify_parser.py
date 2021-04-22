@@ -22,6 +22,40 @@ from tqdm import tqdm
 
 SONGS_PATH = "../scraper/top40_scraper/unique_songs.csv"
 
+logging.basicConfig(format='%(levelname)s\t%(message)s',
+                    filename="spotify_parsing.log",
+                    filemode="w",
+                    level=logging.INFO)
+
+spotify_features_head = [
+    "song_name",
+    "album_id",
+    "artists_names",
+    "artists_id",
+    "explicit",
+    "duration",
+    "song_id",
+    "popularity",
+    'danceability',
+    'energy',
+    'key',
+    'loudness',
+    'mode',
+    'speechiness',
+    'acousticness',
+    'instrumentalness',
+    'liveness',
+    'valence',
+    'tempo',
+    'type',
+    'id',
+    'uri',
+    'track_href',
+    'analysis_url',
+    'duration_ms',
+    'time_signature'
+]
+
 
 def get_spotify_keys():
     """
@@ -140,40 +174,6 @@ def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
     return track_feat
 
 
-logging.basicConfig(format='%(levelname)s\t%(message)s',
-                    filename="spotify_parsing.log",
-                    filemode="w",
-                    level=logging.INFO)
-
-spotify_features_head = [
-    "song_name",
-    "album_id",
-    "artists_names",
-    "artists_id",
-    "explicit",
-    "duration",
-    "song_id",
-    "popularity",
-    'danceability',
-    'energy',
-    'key',
-    'loudness',
-    'mode',
-    'speechiness',
-    'acousticness',
-    'instrumentalness',
-    'liveness',
-    'valence',
-    'tempo',
-    'type',
-    'id',
-    'uri',
-    'track_href',
-    'analysis_url',
-    'duration_ms',
-    'time_signature'
-]
-
 if __name__ == "__main__":
     keys = get_spotify_keys()
 
@@ -226,3 +226,7 @@ if __name__ == "__main__":
                 features_dict['duration_ms'],
                 features_dict['time_signature']
             ])
+            s_name = song_feat["song_name"],
+            a_name = song_feat["artists_names"],
+            logging.warning(f"{s_name} by {' '.join(a_name)}"
+                            f", id:{song_id} written to file")
