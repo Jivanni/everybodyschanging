@@ -28,6 +28,8 @@ logging.basicConfig(format='%(levelname)s\t%(message)s',
                     level=logging.INFO)
 
 spotify_features_head = [
+    "album_release_date",
+    "album_type",
     "song_name",
     "album_id",
     "artists_names",
@@ -111,6 +113,8 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
     """
     # Get the first track that match the query
     album_id = track_features["album"]["id"]
+    album_release_date = track_features["album"]["release_date"]
+    album_type = track_features["album"]["album_type"]
     artists_names = [
         artist["name"]
         for artist in track_features["artists"]
@@ -126,6 +130,8 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
     popularity: int = track_features["popularity"]
 
     out_dict = {
+        "album_release_date": album_release_date,
+        "album_type": album_type,
         "song_name": song_name,
         "album_id": album_id,
         "artists_names": artists_names,
@@ -181,15 +187,21 @@ if __name__ == "__main__":
                                            client_secret=keys["client_secret"])
     sp = spotipy.Spotify(client_credentials_manager=credentials)
 
-    with open(SONGS_PATH, "r") as songs_file, open("./spotify_features.csv", "w") as features_file:
+    with open(SONGS_PATH, "r") as songs_file \
+            , open("./spotify_features.csv", "w") as features_file:
         next(songs_file)  # skip header
         songs_reader = csv.reader(songs_file, delimiter=";")
         spotify_features_writer = csv.writer(features_file, delimiter=";")
         spotify_features_writer.writerow(spotify_features_head)
 
-        for artist, song in tqdm(songs_reader, total=get_num_lines(SONGS_PATH), desc="Parsing the songs"):
-            cleaned_artist = artist.translate(str.maketrans(punctuation, ' ' * len(punctuation)))
-            cleaned_song = song.translate(str.maketrans(punctuation, ' ' * len(punctuation)))
+        for artist, song in tqdm(songs_reader,
+                                 total=get_num_lines(SONGS_PATH),
+                                 desc="Parsing the songs"):
+
+            cleaned_artist = artist.translate(str.maketrans(punctuation,
+                                              ' ' * len(punctuation)))
+            cleaned_song = song.translate(str.maketrans(punctuation,
+                                          ' ' * len(punctuation)))
 
             song_feat = get_feature_and_check(cleaned_artist, cleaned_song)
             # if I cannot find the song skip the loop
@@ -200,6 +212,8 @@ if __name__ == "__main__":
 
             features_dict = sp.audio_features(song_id)[0]
             spotify_features_writer.writerow([
+                song_feat["album_release_date"],
+                song_feat["album_type"],
                 song_feat["song_name"],
                 song_feat["album_id"],
                 song_feat["artists_names"],
@@ -226,7 +240,11 @@ if __name__ == "__main__":
                 features_dict['duration_ms'],
                 features_dict['time_signature']
             ])
-            s_name = song_feat["song_name"],
-            a_name = song_feat["artists_names"],
-            logging.warning(f"{s_name} by {' '.join(a_name)}"
+            if isinstance(song_feat["song_name"], list):
+                s_name = ", ".join(song_feat["song_name"])
+            else:
+                s_name = song_feat["song_name"]
+            a_name = song_feat["artists_names"]
+            logging.warning(f"{s_name} by {s_name}"
                             f", id:{song_id} written to file")
+
