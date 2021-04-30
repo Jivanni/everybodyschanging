@@ -59,7 +59,7 @@ spotify_features_head = [
 ]
 
 
-def get_spotify_keys():
+def get_spotify_keys(path="./spotify_keys.txt"):
     """
     Function that reads a file where are stored a pair of spotify keys
     Returns
@@ -69,7 +69,7 @@ def get_spotify_keys():
         values are the effective keys.
     """
     try:
-        with open("./spotify_keys.txt", "r") as spotify_keys:
+        with open(path, "r") as spotify_keys:
             client_keys = dict()
             for key_string in spotify_keys.readlines():
                 key, value = key_string.strip().split(": ")
@@ -116,17 +116,17 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
     album_release_date = track_features["album"]["release_date"]
     album_type = track_features["album"]["album_type"]
     artists_names = [
-        artist["name"]
-        for artist in track_features["artists"]
+        artst["name"]
+        for artst in track_features["artists"]
     ]
     artists_id = [
-        artist["id"]
-        for artist in track_features["artists"]
+        artst["id"]
+        for artst in track_features["artists"]
     ]
     explicit: bool = track_features["explicit"]
     song_name: bool = track_features["name"]
     duration: int = track_features["duration_ms"]
-    song_id: str = track_features["id"]
+    s_id: str = track_features["id"]
     popularity: int = track_features["popularity"]
 
     out_dict = {
@@ -138,7 +138,7 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
         "artists_id": artists_id,
         "explicit": explicit,
         "duration": duration,
-        "song_id": song_id,
+        "song_id": s_id,
         "popularity": popularity,
     }
     return out_dict
@@ -183,12 +183,13 @@ def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
 if __name__ == "__main__":
     keys = get_spotify_keys()
 
+    # Create credential for the api
     credentials = SpotifyClientCredentials(client_id=keys["clientID"],
                                            client_secret=keys["client_secret"])
+    # Instanciate the API
     sp = spotipy.Spotify(client_credentials_manager=credentials)
 
-    with open(SONGS_PATH, "r") as songs_file \
-            , open("./spotify_features.csv", "w") as features_file:
+    with open(SONGS_PATH, "r") as songs_file, open("./spotify_features.csv", "w") as features_file:
         next(songs_file)  # skip header
         songs_reader = csv.reader(songs_file, delimiter=";")
         spotify_features_writer = csv.writer(features_file, delimiter=";")
@@ -197,19 +198,19 @@ if __name__ == "__main__":
         for artist, song in tqdm(songs_reader,
                                  total=get_num_lines(SONGS_PATH),
                                  desc="Parsing the songs"):
-
+            # remove strange char that can mislead the searcher
             cleaned_artist = artist.translate(str.maketrans(punctuation,
-                                              ' ' * len(punctuation)))
+                                                            ' ' * len(punctuation)))
             cleaned_song = song.translate(str.maketrans(punctuation,
-                                          ' ' * len(punctuation)))
-
+                                                        ' ' * len(punctuation)))
+            # return the features of a song
             song_feat = get_feature_and_check(cleaned_artist, cleaned_song)
             # if I cannot find the song skip the loop
             if song_feat is None:
                 continue
 
             song_id = song_feat["song_id"]
-
+            # return the audio features by Spotify
             features_dict = sp.audio_features(song_id)[0]
             spotify_features_writer.writerow([
                 song_feat["album_release_date"],
@@ -240,11 +241,11 @@ if __name__ == "__main__":
                 features_dict['duration_ms'],
                 features_dict['time_signature']
             ])
+
             if isinstance(song_feat["song_name"], list):
                 s_name = ", ".join(song_feat["song_name"])
             else:
                 s_name = song_feat["song_name"]
             a_name = song_feat["artists_names"]
-            logging.warning(f"{s_name} by {s_name}"
-                            f", id:{song_id} written to file")
-
+            logging.info(f"{s_name} by {s_name}"
+                         f", id:{song_id} written to file")

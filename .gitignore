@@ -5,6 +5,7 @@
 .idea/workspace.xml
 *.txt
 *.csv
+test*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
