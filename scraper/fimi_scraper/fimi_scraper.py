@@ -12,8 +12,8 @@ import time
 from typing import List
 
 VERBOSE = True
-START_DATE = 2016
-END_DATE = 2017
+START_DATE = 2007
+END_DATE = 2020
 CHART_NAME = "top_singoli"
 DOWNLOAD_DIR = "downloads"
 
@@ -72,9 +72,25 @@ def get_songs(soup: BeautifulSoup) -> List[List[str]]:
     chart_songs = soup.select(".tab-pane.active tbody tr")
     out = []
     for chart_song in chart_songs:
-        song_title, artist_name, tag, publisher, curr_position, prev_rank, n_weeks = chart_song.find_all(text=True)
+        #finds the div elements containing tag and publisher, publisher might be empty
+        tag_publisher = chart_song.find("td", class_="c3").find_all("div")
+        #finds the div element contaning the song title
+        song_title = chart_song.find("div", class_= "chart-section-element-title").get_text().strip()
+        # finds the div element contaning the artist name
+        artist_name = chart_song.find("div", class_="chart-section-element-author").get_text().strip()
+        # gets the tag from tag_publisher
+        tag = tag_publisher[0].get_text().strip()
+        # gets the publisher from tag_publisher
+        publisher = tag_publisher[1].get_text().strip()
+        # finds the td element contaning the current rank of the song
+        curr_rank = chart_song.find("td", class_="c4").get_text().strip()
+        # finds the td element contaning the previous rank of the song
+        prev_rank = chart_song.find("td", class_="c5").get_text().strip()
+        #finds the td element containing how low the song has been on the chart
+        n_weeks = chart_song.find("td", class_="c6").get_text().strip()
+
         out.append([
-            unidecode(curr_position),
+            unidecode(curr_rank),
             unidecode(song_title.lower()),
             unidecode(artist_name.lower()),
             unidecode(tag.lower()),
@@ -104,8 +120,9 @@ if __name__ == "__main__":
             soup = get_html(chart_url)
             songs_data = get_songs(soup)
             if not songs_data:
-                logging.warning(f"end of year {year}")
-                break
+                logging.warning(f"week {week} missing")
+                week += 1
+                continue
             if VERBOSE:
                 print(current_date)
 
@@ -114,18 +131,20 @@ if __name__ == "__main__":
                 writer = csv.writer(file_handler, delimiter=';',
                                     quotechar='"', quoting=csv.QUOTE_ALL)
                 writer.writerow(FIELD_NAMES)
-                for curr_position, song_title, artist_name, tag, publisher, prev_rank, n_weeks in songs_data:
-                    writer.writerow([curr_position, song_title, artist_name, tag, publisher, prev_rank, n_weeks])
+                for curr_rank, song_title, artist_name, tag, publisher, prev_rank, n_weeks in songs_data:
+                    writer.writerow([curr_rank, song_title, artist_name, tag, publisher, prev_rank, n_weeks])
 
                     # Create of all the unique songs in all the charts
-                    if artist_name + ";" + song_title not in unique_songs:
-                        unique_songs.append(artist_name + ";" + song_title)
+                    entry = f'"{artist_name}";"{song_title}"'
+                    if entry not in unique_songs:
+                        unique_songs.append(entry)
 
                     if VERBOSE:
                         print(f"\t{song_title}\t{artist_name}")
             logging.info(f"Parsing {current_date}")
 
             week += 1
+        logging.warning(f"end of year {year}")
         year += 1
 
     driver.quit()
