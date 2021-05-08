@@ -96,11 +96,11 @@ def get_num_lines(file_path: str) -> int:
     int
         number of line in the file
     """
-    fp = open(file_path, "r+")
-    buf = mmap.mmap(fp.fileno(), 0)
-    lines = 0
-    while buf.readline():
-        lines += 1
+    with open(file_path, "r+") as f_path:
+        buf = mmap.mmap(f_path.fileno(), 0)
+        lines = 0
+        while buf.readline():
+            lines += 1
     return lines - 1
 
 
@@ -149,7 +149,8 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
     return out_dict
 
 
-def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
+def get_feature_and_check(singer: str,
+                          track: str, sp_obj) -> Optional[Dict[str, str]]:
     """
     This function takes a singer and the name of a track and returns
     the spotify features for that particular track if he can find the track
@@ -165,20 +166,19 @@ def get_feature_and_check(singer: str, track: str) -> Optional[Dict[str, str]]:
         an id if it found the song, None otherwise
     """
     query = f'artist:{singer} track:{track}'
-    track_id = sp.search(q=query, type='track',
-                         market="IT", limit=1)
+    track_id = sp_obj.search(q=query, type='track', market="IT", limit=1)
     try:
         track_feat = get_song_features(track_id['tracks']['items'][0])
     except IndexError:
         # if it can't find the track maybe it's because the artist is misspelled
         query = f'track:{track}'
-        track_id = sp.search(q=query, type='track',
-                             market="IT", limit=1)
+        track_id = sp_obj.search(q=query, type='track', market="IT", limit=1)
         try:
             track_feat = get_song_features(track_id["tracks"]["items"][0])
         except IndexError:
             # if it can't find the track return None
-            logging.warning(f"{query} not found")
+            #logging.warning(f"{query} not found")
+            print(f"{query} not found!!!!")
 
             return None
 
@@ -191,7 +191,7 @@ if __name__ == "__main__":
     # Create credential for the api
     credentials = SpotifyClientCredentials(client_id=keys["clientID"],
                                            client_secret=keys["client_secret"])
-    # Instanciate the API
+    # Instantiate the API
     sp = spotipy.Spotify(client_credentials_manager=credentials)
 
     with open(SONGS_PATH, "r",

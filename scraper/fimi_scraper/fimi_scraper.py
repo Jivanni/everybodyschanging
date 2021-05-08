@@ -24,7 +24,7 @@ CHARTS_CODES = {
     "vinili": 5
 }
 CHART_CODE = CHARTS_CODES[CHART_NAME]
-URL = f"https://www.fimi.it/top-of-the-music/classifiche.kl#/charts/{CHART_CODE}"
+FIMI_URL = f"https://www.fimi.it/top-of-the-music/classifiche.kl#/charts/{CHART_CODE}"
 FIELD_NAMES = ["rank", "title", "artist",
                "tag", "publisher", "prev_rank", "n_weeks", "date"]
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         week = 1
         while week <= 52:
             current_date = f"/{year}/{week}"
-            chart_url = URL + current_date
+            chart_url = FIMI_URL + current_date
             csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{year}-{week}" \
                            + "_" + CHART_NAME + ".csv"
             soup = get_html(chart_url)
@@ -163,7 +163,7 @@ if __name__ == "__main__":
             logging.info(f"Parsing {current_date}")
 
             week += 1
-        logging.warning(f"end of year {year}")
+        logging.info(f"end of year {year}")
         year += 1
 
     driver.quit()
