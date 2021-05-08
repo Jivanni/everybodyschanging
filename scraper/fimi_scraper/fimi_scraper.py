@@ -11,7 +11,7 @@ from tqdm import tqdm
 from unidecode import unidecode
 
 VERBOSE = True
-START_DATE = 2007
+START_DATE = 2000
 END_DATE = 2020
 CHART_NAME = "top_singoli"
 DOWNLOAD_DIR = "./downloads"
@@ -72,7 +72,11 @@ def get_songs(bs_obj: BeautifulSoup) -> List[List[str]]:
     List[List[str]]
     """
     chart_songs = bs_obj.select(".tab-pane.active tbody tr")
-    date = bs_obj.find(class_="chart-section-header-subtitle").get_text()
+    date = bs_obj.find(class_="chart-section-header-subtitle")
+    if not date:
+        return []
+
+    date = date.get_text()
     date_match = re.findall(r"\d\d.\d\d.\d\d\d\d", date)[-1]
     out = []
     for chart_song in chart_songs:
