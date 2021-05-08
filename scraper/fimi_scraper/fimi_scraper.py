@@ -2,6 +2,7 @@ import csv
 import logging
 import os
 import time
+import re
 from typing import List
 
 from bs4 import BeautifulSoup
@@ -25,7 +26,7 @@ CHARTS_CODES = {
 CHART_CODE = CHARTS_CODES[CHART_NAME]
 URL = f"https://www.fimi.it/top-of-the-music/classifiche.kl#/charts/{CHART_CODE}"
 FIELD_NAMES = ["rank", "title", "artist",
-               "tag", "publisher", "prev_rank", "n_weeks"]
+               "tag", "publisher", "prev_rank", "n_weeks", "date"]
 
 logging.basicConfig(format='%(levelname)s\t%(message)s',
                     filename="parsing.log",
@@ -71,6 +72,8 @@ def get_songs(bs_obj: BeautifulSoup) -> List[List[str]]:
     List[List[str]]
     """
     chart_songs = bs_obj.select(".tab-pane.active tbody tr")
+    date = bs_obj.find(class_="chart-section-header-subtitle").get_text()
+    date_match = re.findall(r"\d\d.\d\d.\d\d\d\d", date)[-1]
     out = []
     for chart_song in chart_songs:
         # finds the div elements containing tag and publisher, publisher might
@@ -102,7 +105,8 @@ def get_songs(bs_obj: BeautifulSoup) -> List[List[str]]:
             unidecode(tag.lower()),
             unidecode(publisher.lower()),
             unidecode(prev_rank),
-            unidecode(n_weeks)
+            unidecode(n_weeks),
+            date_match
         ])
     return out
 
@@ -143,11 +147,11 @@ if __name__ == "__main__":
                                     quotechar='"', quoting=csv.QUOTE_ALL)
                 writer.writerow(FIELD_NAMES)
                 for curr_rank, song_title, artist_name, tag, publisher, \
-                         prev_rank, n_weeks in songs_data:
+                         prev_rank, n_weeks, date in songs_data:
 
                     writer.writerow(
                         [curr_rank, song_title, artist_name, tag, publisher,
-                         prev_rank, n_weeks])
+                         prev_rank, n_weeks, date])
 
                     # Create of all the unique songs in all the charts
                     entry = f'"{artist_name}";"{song_title}"'
