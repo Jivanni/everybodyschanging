@@ -14,7 +14,7 @@ import csv
 import logging
 import mmap
 from string import punctuation
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -59,9 +59,13 @@ spotify_features_head = [
 ]
 
 
-def get_spotify_keys(path="./spotify_keys.txt"):
+def get_spotify_keys(path: str = "./spotify_keys.txt") -> Dict[str, str]:
     """
     Function that reads a file where are stored a pair of spotify keys
+    Parameters
+    -------
+    path: str
+        path to the file containing the credential keys.
     Returns
     -------
     Dict[str: str]
@@ -76,8 +80,8 @@ def get_spotify_keys(path="./spotify_keys.txt"):
                 client_keys[key] = value
         return client_keys
     except FileNotFoundError:
-        raise FileNotFoundError("You don't have a file named 'spotify_keys.txt' "
-                                "that should contain both API keys!")
+        raise FileNotFoundError("You don't have a file named 'spotify_keys.txt'"
+                                " that should contain both API keys!")
 
 
 def get_num_lines(file_path: str) -> int:
@@ -86,10 +90,11 @@ def get_num_lines(file_path: str) -> int:
     Parameters
     ----------
     file_path : str
-    location of the file
+        location of the file
     Returns
     -------
-    int: number of line in the file
+    int
+        number of line in the file
     """
     fp = open(file_path, "r+")
     buf = mmap.mmap(fp.fileno(), 0)
@@ -189,7 +194,9 @@ if __name__ == "__main__":
     # Instanciate the API
     sp = spotipy.Spotify(client_credentials_manager=credentials)
 
-    with open(SONGS_PATH, "r") as songs_file, open("./spotify_features.csv", "w") as features_file:
+    with open(SONGS_PATH, "r",
+              encoding="utf8") as songs_file, open("./spotify_features.csv", "w",
+                                                   encoding="utf8") as features_file:
         next(songs_file)  # skip header
         songs_reader = csv.reader(songs_file, delimiter=";")
         spotify_features_writer = csv.writer(features_file, delimiter=";")
