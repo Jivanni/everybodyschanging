@@ -11,21 +11,17 @@ This script requires spotipy and tqdm to be installed
 This file is designed to run stand alone.
 """
 import csv
-import logging
+import re
 import mmap
 from string import punctuation
-from typing import Any, Dict, Optional
+import datetime
+from typing import Any, Dict, Optional, Tuple, List
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from tqdm import tqdm
 
 SONGS_PATH = "../scraper/top40_scraper/unique_songs.csv"
-
-logging.basicConfig(format='%(levelname)s\t%(message)s',
-                    filename="spotify_parsing.log",
-                    filemode="w",
-                    level=logging.INFO)
 
 spotify_features_head = [
     "album_release_date",
@@ -149,9 +145,79 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
     return out_dict
 
 
+def preprocess_query(singer: str, track: str) -> Tuple[str, str]:
+    """
+    Utility function to clean the name of the artist and the name of the song
+    Parameters
+    ----------
+    singer : str
+    track : str
+
+    Returns
+    -------
+    Tuple[str, str]
+        returns the song and the artist's strings cleaned
+    """
+    singer = re.sub(r" ?\([^)]+\)", "", singer)
+    track = re.sub(r" ?\([^)]+\)", "", track)
+
+    return singer, track
+
+
+def get_oldest(tracks: List[dict]) -> dict:
+    """
+    This function takes a list of tracks taken from Spotify
+    and returns the oldest track
+    Parameters
+    ----------
+    tracks : List[dict]
+
+    Returns
+    -------
+    dict
+        json object of the oldest track
+    """
+    oldest_time = datetime.datetime.now()
+    oldest_track = tracks[0]
+    for track in tracks:
+        release_track = track["album"]["release_date"]
+        release = datetime.datetime.strptime(release_track,
+                                             "%Y-%m-%d")
+        if release < oldest_time:
+            oldest_time = release
+            oldest_track = track
+
+    return oldest_track
+
+
+def get_features_from_id(query: str,
+                         sp_obj: spotipy.client.Spotify) -> Optional[Dict[str,
+                                                                          str]]:
+    """
+    Utility function that return the track features given a query and a spotipy
+    search object
+    Parameters
+    ----------
+    query : str
+    sp_obj : spotipy.client.Spotify
+
+    Returns
+    -------
+    Optional[Dict[str, str]]
+    """
+    track_id = sp_obj.search(q=query, type='track', limit=10)
+    try:
+        oldest_track = get_oldest(track_id["tracks"]["items"])
+        track_feat = get_song_features(oldest_track)
+    except IndexError:
+        return None
+    return track_feat
+
+
 def get_feature_and_check(singer: str,
                           track: str,
-                          sp_obj: spotipy.client.Spotify) -> Optional[Dict[str, str]]:
+                          sp_obj: spotipy.client.Spotify) -> Optional[Dict[str,
+                                                                           str]]:
     """
     This function takes a singer and the name of a track and returns
     the spotify features for that particular track if he can find the track
@@ -167,24 +233,21 @@ def get_feature_and_check(singer: str,
     Optional[Dict[str, str]
         an id if it found the song, None otherwise
     """
-    query = f'artist:{singer} track:{track}'
-    track_id = sp_obj.search(q=query, type='track', market="IT", limit=1)
-    try:
-        track_feat = get_song_features(track_id['tracks']['items'][0])
-    except IndexError:
-        # if it can't find the track maybe it's because the artist is misspelled
-        query = f'track:{track}'
-        track_id = sp_obj.search(q=query, type='track', market="IT", limit=1)
-        try:
-            track_feat = get_song_features(track_id["tracks"]["items"][0])
-        except IndexError:
-            # if it can't find the track return None
-            logging.warning(f"{query} not found")
-            # print(f"{query} not found!!!!")
-
-            return None
-
-    return track_feat
+    singer, track = preprocess_query(singer, track)
+    possible_queries = [
+        f'artist:{singer} track:{track}',
+        f'track:{track}',
+        f'artist: {singer} {track}',
+        f'{track}'
+    ]
+    # try all possible queries. There are bugs in the api that makes harder
+    # to handle certain types of track names. Therefore I created some options to
+    # avoid those bugs. Some are riskier than others
+    for query in possible_queries:
+        track_feat = get_features_from_id(query, sp_obj)
+        if track_feat is not None:
+            return track_feat
+    return None
 
 
 if __name__ == "__main__":
@@ -257,5 +320,3 @@ if __name__ == "__main__":
             else:
                 S_NAME = song_feat["song_name"]
             a_name = song_feat["artists_names"]
-            logging.info(f"{S_NAME} by {S_NAME}"
-                         f", id:{song_id} written to file")

@@ -28,14 +28,17 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('window-size=1920x1080')
 
 START_DATE: int = 2013
-END_DATE: int = 2014
+END_DATE: int = 2015
 VERBOSE: bool = True
 MAX_WEEKS: int = 60
 
 not_found_songs: int = 0
 unique_ids: list = []
+spotify_audio_features_dict: dict = {}
 
 spotify_features_head = [
+    "original_song_name",
+    "original_artists_name",
     "curr_rank",
     "tag_fimi",
     "publisher",
@@ -119,8 +122,11 @@ if __name__ == "__main__":
                     song_feat = get_feature_and_check(artist_name, song_title, sp)
                     # if spotipy can't find the song, move on
                     if song_feat is None:
-                        logging.warning(f"{song_title} by {artist_name} not found")
+                        logging.warning(f"track: {song_title} by {artist_name}"
+                                        " not found")
                         spotify_features_writer.writerow([
+                            song_title,
+                            artist_name,
                             curr_rank,
                             tag,
                             publisher,
@@ -154,15 +160,25 @@ if __name__ == "__main__":
                             ""
                         ])
                         continue
-                    # print(week, year, curr_rank, song_title, artist_name)
 
                     song_id = song_feat["song_id"]
                     if song_id not in unique_ids:
                         unique_ids.append(song_id)
 
                     # return the audio features by Spotify
-                    features_dict = sp.audio_features(song_id)[0]
+                    # trying to memoize this step in order to avoid useless
+                    # calls to the api
+                    if song_id in spotify_audio_features_dict:
+                        features_dict = spotify_audio_features_dict[song_id]
+                    else:
+                        spotify_audio_features_dict[song_id] = sp.audio_features(
+                            song_id
+                        )[0]
+                        features_dict = spotify_audio_features_dict[song_id]
+
                     spotify_features_writer.writerow([
+                        song_title,
+                        artist_name,
                         curr_rank,
                         tag,
                         publisher,
@@ -205,4 +221,4 @@ if __name__ == "__main__":
     print(f"Parsed from {START_DATE} to {END_DATE}")
     print(f"Found {len(unique_ids)} songs")
     print(f"I couldn't find {not_found_songs} songs on Spotify."
-          "Check logs for more information.")
+          " Check logs for more information.")
