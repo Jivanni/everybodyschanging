@@ -55,7 +55,8 @@ spotify_features_head = [
 ]
 
 
-def get_spotify_keys(path: str = "./spotify_keys.txt") -> Dict[str, str]:
+def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
+                                                                        str]]:
     """
     Function that reads a file where are stored a pair of spotify keys
     Parameters
@@ -75,9 +76,11 @@ def get_spotify_keys(path: str = "./spotify_keys.txt") -> Dict[str, str]:
                 key, value = key_string.strip().split(": ")
                 client_keys[key] = value
         return client_keys
-    except FileNotFoundError:
-        raise FileNotFoundError("You don't have a file named 'spotify_keys.txt'"
-                                " that should contain both API keys!")
+    except FileNotFoundError as error:
+        print(error,
+              "You don't have a file named 'spotify_keys.txt'"
+              " that should contain both API keys!")
+        return None
 
 
 def get_num_lines(file_path: str) -> int:

@@ -28,7 +28,7 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('window-size=1920x1080')
 
 START_DATE: int = 2013
-END_DATE: int = 2015
+END_DATE: int = 2013
 VERBOSE: bool = True
 MAX_WEEKS: int = 60
 
@@ -111,7 +111,7 @@ if __name__ == "__main__":
                 songs_data = get_songs(soup)
                 # if no more weeks, skip
                 if not songs_data:
-                    logging.warning(f"week {WEEK} missing")
+                    logging.warning("week %s missing", WEEK)
                     WEEK += 1
                     not_found_songs += 1
                     pbar.update(1)
@@ -122,8 +122,9 @@ if __name__ == "__main__":
                     song_feat = get_feature_and_check(artist_name, song_title, sp)
                     # if spotipy can't find the song, move on
                     if song_feat is None:
-                        logging.warning(f"track: {song_title} by {artist_name}"
-                                        " not found")
+                        logging.warning("track: %s by %s not found",
+                                        song_title,
+                                        artist_name)
                         spotify_features_writer.writerow([
                             song_title,
                             artist_name,
@@ -211,10 +212,10 @@ if __name__ == "__main__":
                         features_dict['duration_ms'],
                         features_dict['time_signature']
                     ])
-                logging.info(f"Parsing {current_date}")
+                logging.info("Parsing %s", current_date)
                 WEEK += 1
                 pbar.update(1)
-            logging.info(f"end of year {YEAR}")
+            logging.info("end of year %s", YEAR)
             YEAR += 1
 
         pbar.close()

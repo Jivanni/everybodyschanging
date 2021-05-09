@@ -133,14 +133,14 @@ if __name__ == "__main__":
 
     unique_songs = []
 
-    year = START_DATE
+    YEAR = START_DATE
 
-    while year <= END_DATE:
+    while YEAR <= END_DATE:
         week = 1
         while week <= 52:
-            current_date = f"/{year}/{week}"
+            current_date = f"/{YEAR}/{week}"
             chart_url = FIMI_URL + current_date
-            csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{year}-{week}" \
+            csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{YEAR}-{week}" \
                            + "_" + CHART_NAME + ".csv"
             soup = get_html(chart_url)
             songs_data = get_songs(soup)
@@ -173,7 +173,7 @@ if __name__ == "__main__":
                         print(f"\t{song_title}\t{artist_name}")
 
             week += 1
-        year += 1
+        YEAR += 1
 
     driver.quit()
     # ==========================================================================
