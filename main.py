@@ -105,6 +105,7 @@ if __name__ == "__main__":
         while YEAR <= END_DATE:
             WEEK = 1
             while WEEK <= MAX_WEEKS:
+                pbar.set_description(f"Scraping week {WEEK} year {YEAR}")
                 current_date = f"/{YEAR}/{WEEK}"
                 chart_url = FIMI_URL + current_date
                 soup = get_html(chart_url)

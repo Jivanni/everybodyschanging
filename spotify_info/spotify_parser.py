@@ -23,36 +23,6 @@ from tqdm import tqdm
 
 SONGS_PATH = "../scraper/top40_scraper/unique_songs.csv"
 
-spotify_features_head = [
-    "album_release_date",
-    "album_type",
-    "song_name",
-    "album_id",
-    "artists_names",
-    "artists_id",
-    "explicit",
-    "duration",
-    "song_id",
-    "popularity",
-    'danceability',
-    'energy',
-    'key',
-    'loudness',
-    'mode',
-    'speechiness',
-    'acousticness',
-    'instrumentalness',
-    'liveness',
-    'valence',
-    'tempo',
-    'type',
-    'id',
-    'uri',
-    'track_href',
-    'analysis_url',
-    'duration_ms',
-    'time_signature'
-]
 
 
 def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
@@ -184,8 +154,18 @@ def get_oldest(tracks: List[dict]) -> dict:
     oldest_track = tracks[0]
     for track in tracks:
         release_track = track["album"]["release_date"]
+        release_precision = track["album"]["release_date_precision"]
+
+        # if the date is not precise then I fave to format it accordingly
+        if release_precision == "day":
+            date_format = "%Y-%m-%d"
+        elif release_precision == "month":
+            date_format = "%Y-%m"
+        else:
+            date_format = "%Y"
+
         release = datetime.datetime.strptime(release_track,
-                                             "%Y-%m-%d")
+                                             date_format)
         if release < oldest_time:
             oldest_time = release
             oldest_track = track
@@ -254,6 +234,36 @@ def get_feature_and_check(singer: str,
 
 
 if __name__ == "__main__":
+    spotify_features_head = [
+        "album_release_date",
+        "album_type",
+        "song_name",
+        "album_id",
+        "artists_names",
+        "artists_id",
+        "explicit",
+        "duration",
+        "song_id",
+        "popularity",
+        'danceability',
+        'energy',
+        'key',
+        'loudness',
+        'mode',
+        'speechiness',
+        'acousticness',
+        'instrumentalness',
+        'liveness',
+        'valence',
+        'tempo',
+        'type',
+        'id',
+        'uri',
+        'track_href',
+        'analysis_url',
+        'duration_ms',
+        'time_signature'
+    ]
     keys = get_spotify_keys()
 
     # Create credential for the api
