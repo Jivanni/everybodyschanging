@@ -1,8 +1,14 @@
+"""
+Main parser
+This script scrape the website of the Federazione Industria Musicale Italiana
+(FIMI) And search each song on spotify to retrieve various informations.
+"""
 import os
 import csv
-
-from selenium import webdriver
 import logging
+
+from tqdm import tqdm
+from selenium import webdriver
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -20,11 +26,14 @@ logging.basicConfig(format='%(levelname)s\t%(message)s',
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('window-size=1920x1080')
-#driver = webdriver.Chrome(options=chrome_options)
 
 START_DATE: int = 2013
 END_DATE: int = 2014
 VERBOSE: bool = True
+MAX_WEEKS: int = 60
+
+not_found_songs: int = 0
+unique_ids: list = []
 
 spotify_features_head = [
     "curr_rank",
@@ -78,26 +87,31 @@ if __name__ == "__main__":
     except FileExistsError:
         pass
 
-    unique_songs = []
-
-    year = START_DATE
+    YEAR = START_DATE
     with open("./data/final_df.csv", "w",
-              encoding="utf8") as final_csv, webdriver.Chrome(options=chrome_options) as webdriver:
+              encoding="utf8") as final_csv, webdriver.Chrome(
+                                                               options=chrome_options
+                                                            ) as webdriver:
+
         spotify_features_writer = csv.writer(final_csv, delimiter=";")
         spotify_features_writer.writerow(spotify_features_head)
-        while year <= END_DATE:
-            week = 1
-            while week <= 60:
-                current_date = f"/{year}/{week}"
+
+        TOTAL_N_WEEKS = (END_DATE - START_DATE + 1) * MAX_WEEKS
+
+        pbar = tqdm(total=TOTAL_N_WEEKS)
+        while YEAR <= END_DATE:
+            WEEK = 1
+            while WEEK <= MAX_WEEKS:
+                current_date = f"/{YEAR}/{WEEK}"
                 chart_url = FIMI_URL + current_date
-                csv_filename = os.path.join(DOWNLOAD_DIR, CHART_NAME,
-                                            f"{year}-{week}_{CHART_NAME}.csv")
                 soup = get_html(chart_url)
                 songs_data = get_songs(soup)
                 # if no more weeks, skip
                 if not songs_data:
-                    logging.warning(f"week {week} missing")
-                    week += 1
+                    logging.warning(f"week {WEEK} missing")
+                    WEEK += 1
+                    not_found_songs += 1
+                    pbar.update(1)
                     continue
 
                 for curr_rank, song_title, artist_name, tag, publisher, prev_rank, \
@@ -106,8 +120,46 @@ if __name__ == "__main__":
                     # if spotipy can't find the song, move on
                     if song_feat is None:
                         logging.warning(f"{song_title} by {artist_name} not found")
+                        spotify_features_writer.writerow([
+                            curr_rank,
+                            tag,
+                            publisher,
+                            date,
+                            "",
+                            "",
+                            song_title,
+                            "",
+                            artist_name,
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                        ])
                         continue
+                    # print(week, year, curr_rank, song_title, artist_name)
+
                     song_id = song_feat["song_id"]
+                    if song_id not in unique_ids:
+                        unique_ids.append(song_id)
+
                     # return the audio features by Spotify
                     features_dict = sp.audio_features(song_id)[0]
                     spotify_features_writer.writerow([
@@ -143,3 +195,14 @@ if __name__ == "__main__":
                         features_dict['duration_ms'],
                         features_dict['time_signature']
                     ])
+                logging.info(f"Parsing {current_date}")
+                WEEK += 1
+                pbar.update(1)
+            logging.info(f"end of year {YEAR}")
+            YEAR += 1
+
+        pbar.close()
+    print(f"Parsed from {START_DATE} to {END_DATE}")
+    print(f"Found {len(unique_ids)} songs")
+    print(f"I couldn't find {not_found_songs} songs on Spotify."
+          "Check logs for more information.")

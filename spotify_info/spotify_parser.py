@@ -150,13 +150,15 @@ def get_song_features(track_features: Dict[str, Any]) -> Dict[str, str]:
 
 
 def get_feature_and_check(singer: str,
-                          track: str, sp_obj) -> Optional[Dict[str, str]]:
+                          track: str,
+                          sp_obj: spotipy.client.Spotify) -> Optional[Dict[str, str]]:
     """
     This function takes a singer and the name of a track and returns
     the spotify features for that particular track if he can find the track
     otherwise it will return None
     Parameters
     ----------
+    sp_obj : spotipy.client.Spotify
     singer : str
     track : str
 
@@ -177,8 +179,8 @@ def get_feature_and_check(singer: str,
             track_feat = get_song_features(track_id["tracks"]["items"][0])
         except IndexError:
             # if it can't find the track return None
-            #logging.warning(f"{query} not found")
-            print(f"{query} not found!!!!")
+            logging.warning(f"{query} not found")
+            # print(f"{query} not found!!!!")
 
             return None
 
@@ -211,7 +213,8 @@ if __name__ == "__main__":
             cleaned_song = song.translate(str.maketrans(punctuation,
                                                         ' ' * len(punctuation)))
             # return the features of a song
-            song_feat = get_feature_and_check(cleaned_artist, cleaned_song)
+            song_feat = get_feature_and_check(cleaned_artist,
+                                              cleaned_song, sp)
             # if I cannot find the song skip the loop
             if song_feat is None:
                 continue
@@ -250,9 +253,9 @@ if __name__ == "__main__":
             ])
 
             if isinstance(song_feat["song_name"], list):
-                s_name = ", ".join(song_feat["song_name"])
+                S_NAME = ", ".join(song_feat["song_name"])
             else:
-                s_name = song_feat["song_name"]
+                S_NAME = song_feat["song_name"]
             a_name = song_feat["artists_names"]
-            logging.info(f"{s_name} by {s_name}"
+            logging.info(f"{S_NAME} by {S_NAME}"
                          f", id:{song_id} written to file")

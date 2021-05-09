@@ -1,3 +1,7 @@
+"""
+This script implements functions useful to scrape the site of the Federazione
+Industria Musicale Italiana
+"""
 import csv
 import logging
 import os
@@ -29,7 +33,7 @@ FIELD_NAMES = ["rank", "title", "artist",
                "tag", "publisher", "prev_rank", "n_weeks", "date"]
 
 logging.basicConfig(format='%(levelname)s\t%(message)s',
-                    filename="parsing.log",
+                    filename="fimi_parsing.log",
                     filemode="w",
                     level=logging.INFO)
 
