@@ -83,7 +83,7 @@ if __name__ == "__main__":
     sp = spotipy.Spotify(client_credentials_manager=credentials)
 
     YEAR = START_DATE
-    with open("./data/final_df.csv", "w",
+    with open("./data/download_df.csv", "w",
               encoding="utf8") as final_csv, webdriver.Chrome(
                                                                options=chrome_options
                                                             ) as webdriver:
