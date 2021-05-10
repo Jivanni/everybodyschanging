@@ -13,8 +13,7 @@ from selenium import webdriver
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from scraper.fimi_scraper.fimi_scraper import get_songs, get_html
-from scraper.fimi_scraper.fimi_scraper import DOWNLOAD_DIR, CHART_NAME, FIMI_URL
+from scraper.fimi_scraper.fimi_scraper import get_songs, get_html, FIMI_URL
 
 from spotify_info.spotify_parser import get_spotify_keys, get_feature_and_check
 
@@ -27,8 +26,8 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('window-size=1920x1080')
 
-START_DATE: int = 2013
-END_DATE: int = 2013
+START_DATE: int = 2006
+END_DATE: int = 2021
 VERBOSE: bool = True
 MAX_WEEKS: int = 60
 
@@ -82,13 +81,6 @@ if __name__ == "__main__":
                                            client_secret=keys["client_secret"])
     # Instantiate the API
     sp = spotipy.Spotify(client_credentials_manager=credentials)
-
-    # Create download folder if not present
-    try:
-        download_path = os.path.join(DOWNLOAD_DIR, CHART_NAME)
-        os.makedirs(download_path)
-    except FileExistsError:
-        pass
 
     YEAR = START_DATE
     with open("./data/final_df.csv", "w",
