@@ -45,3 +45,5 @@ for auths in artists["artists"]:
             fileh.write(get_html(WIKIPEDIA_SESSION, page_link))
             print(f"getting page of {page_title}")
 
+WIKIAPI_SESSION.close()
+WIKIPEDIA_SESSION.close()
