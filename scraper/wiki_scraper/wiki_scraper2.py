@@ -34,7 +34,7 @@ def get_html(session, url) -> BeautifulSoup:
 
 artists = pd.read_csv("unique_songs.csv", sep=";")
 
-for auths in artists["artists"]:
+for auths in pd.unique(artists["artists"]):
     artists_split = re.split(r"feat.|,|&|/", auths)
     for artist in artists_split:
         page_title, page_link = wikiapi2.wiki_getter(WIKIAPI_SESSION, artist.strip())
