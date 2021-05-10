@@ -1,5 +1,8 @@
+"""
+This script implements functions useful to scrape the site of the Federazione
+Industria Musicale Italiana
+"""
 import csv
-import logging
 import os
 import time
 import re
@@ -24,14 +27,9 @@ CHARTS_CODES = {
     "vinili": 5
 }
 CHART_CODE = CHARTS_CODES[CHART_NAME]
-URL = f"https://www.fimi.it/top-of-the-music/classifiche.kl#/charts/{CHART_CODE}"
+FIMI_URL = f"https://www.fimi.it/top-of-the-music/classifiche.kl#/charts/{CHART_CODE}"
 FIELD_NAMES = ["rank", "title", "artist",
                "tag", "publisher", "prev_rank", "n_weeks", "date"]
-
-logging.basicConfig(format='%(levelname)s\t%(message)s',
-                    filename="parsing.log",
-                    filemode="w",
-                    level=logging.INFO)
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
@@ -102,14 +100,24 @@ def get_songs(bs_obj: BeautifulSoup) -> List[List[str]]:
         # finds the td element containing how low the song has been on the chart
         n_weeks = chart_song.find("td", class_="c6").get_text().strip()
 
+        #out.append([
+        #    unidecode(curr_rank),
+        #    unidecode(song_title.lower()),
+        #    unidecode(artist_name.lower()),
+        #    unidecode(tag.lower()),
+        #    unidecode(publisher.lower()),
+        #    unidecode(prev_rank),
+        #    unidecode(n_weeks),
+        #    date_match
+        #])
         out.append([
-            unidecode(curr_rank),
-            unidecode(song_title.lower()),
-            unidecode(artist_name.lower()),
-            unidecode(tag.lower()),
-            unidecode(publisher.lower()),
-            unidecode(prev_rank),
-            unidecode(n_weeks),
+            curr_rank,
+            song_title.lower(),
+            artist_name.lower(),
+            tag.lower(),
+            publisher.lower(),
+            prev_rank,
+            n_weeks,
             date_match
         ])
     return out
@@ -125,19 +133,18 @@ if __name__ == "__main__":
 
     unique_songs = []
 
-    year = START_DATE
+    YEAR = START_DATE
 
-    while year <= END_DATE:
+    while YEAR <= END_DATE:
         week = 1
         while week <= 52:
-            current_date = f"/{year}/{week}"
-            chart_url = URL + current_date
-            csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{year}-{week}" \
+            current_date = f"/{YEAR}/{week}"
+            chart_url = FIMI_URL + current_date
+            csv_filename = DOWNLOAD_DIR + "/" + CHART_NAME + "/" + f"{YEAR}-{week}" \
                            + "_" + CHART_NAME + ".csv"
             soup = get_html(chart_url)
             songs_data = get_songs(soup)
             if not songs_data:
-                logging.warning(f"week {week} missing")
                 week += 1
                 continue
             if VERBOSE:
@@ -164,11 +171,9 @@ if __name__ == "__main__":
 
                     if VERBOSE:
                         print(f"\t{song_title}\t{artist_name}")
-            logging.info(f"Parsing {current_date}")
 
             week += 1
-        logging.warning(f"end of year {year}")
-        year += 1
+        YEAR += 1
 
     driver.quit()
     # ==========================================================================
