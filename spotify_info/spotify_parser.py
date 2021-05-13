@@ -156,19 +156,22 @@ def get_oldest(tracks: List[dict]) -> dict:
         release_track = track["album"]["release_date"]
         release_precision = track["album"]["release_date_precision"]
 
-        # if the date is not precise then I fave to format it accordingly
-        if release_precision == "day":
-            date_format = "%Y-%m-%d"
-        elif release_precision == "month":
-            date_format = "%Y-%m"
-        else:
-            date_format = "%Y"
+        try:
+            # if the date is not precise then I fave to format it accordingly
+            if release_precision == "day":
+                date_format = "%Y-%m-%d"
+            elif release_precision == "month":
+                date_format = "%Y-%m"
+            else:
+                date_format = "%Y"
 
-        release = datetime.datetime.strptime(release_track,
-                                             date_format)
-        if release < oldest_time:
-            oldest_time = release
-            oldest_track = track
+            release = datetime.datetime.strptime(release_track,
+                                                 date_format)
+            if release < oldest_time:
+                oldest_time = release
+                oldest_track = track
+        except:
+            continue
 
     return oldest_track
 
@@ -188,7 +191,7 @@ def get_features_from_id(query: str,
     -------
     Optional[Dict[str, str]]
     """
-    track_id = sp_obj.search(q=query, type='track', limit=10)
+    track_id = sp_obj.search(q=query, type='track', market="IT",  limit=20)
     try:
         oldest_track = get_oldest(track_id["tracks"]["items"])
         track_feat = get_song_features(oldest_track)
@@ -221,7 +224,6 @@ def get_feature_and_check(singer: str,
         f'artist:{singer} track:{track}',
         f'track:{track}',
         f'artist: {singer} {track}',
-        f'{track}'
     ]
     # try all possible queries. There are bugs in the api that makes harder
     # to handle certain types of track names. Therefore I created some options to

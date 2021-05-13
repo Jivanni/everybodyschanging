@@ -80,7 +80,7 @@ if __name__ == "__main__":
     credentials = SpotifyClientCredentials(client_id=keys["clientID"],
                                            client_secret=keys["client_secret"])
     # Instantiate the API
-    sp = spotipy.Spotify(client_credentials_manager=credentials)
+    sp = spotipy.Spotify(client_credentials_manager=credentials, retries=10)
 
     YEAR = START_DATE
     with open("./data/download_df.csv", "w",
