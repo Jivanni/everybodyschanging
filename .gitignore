@@ -5,6 +5,7 @@
 .idea/workspace.xml
 *.txt
 *.csv
+*.html
 test*
 
 # Byte-compiled / optimized / DLL files
