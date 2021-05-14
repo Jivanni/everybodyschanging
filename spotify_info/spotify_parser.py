@@ -24,7 +24,6 @@ from tqdm import tqdm
 SONGS_PATH = "../scraper/top40_scraper/unique_songs.csv"
 
 
-
 def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
                                                                         str]]:
     """
@@ -171,7 +170,7 @@ def get_oldest(tracks: List[dict]) -> dict:
                 oldest_time = release
                 oldest_track = track
         except:
-            continue
+            oldest_time = datetime.datetime.now()
 
     return oldest_track
 
@@ -191,7 +190,7 @@ def get_features_from_id(query: str,
     -------
     Optional[Dict[str, str]]
     """
-    track_id = sp_obj.search(q=query, type='track', market="IT",  limit=20)
+    track_id = sp_obj.search(q=query, type='track', market="IT", limit=20)
     try:
         oldest_track = get_oldest(track_id["tracks"]["items"])
         track_feat = get_song_features(oldest_track)
