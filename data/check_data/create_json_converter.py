@@ -1,7 +1,10 @@
 """
 This file takes a file containing a csv structured as ``spotify_id,spotify_id``
 and creates a json file containing the retrieved info from spotify and the audio
-features
+features:
+
+the output is a json file structured as follows:
+conversion_dict[w_id] = {"info": sp_info, "feats": features_list}
 """
 import json
 from typing import Optional, Dict

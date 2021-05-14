@@ -3,7 +3,6 @@ Main parser
 This script scrape the website of the Federazione Industria Musicale Italiana
 (FIMI) And search each song on spotify to retrieve various informations.
 """
-import os
 import csv
 import logging
 
