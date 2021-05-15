@@ -1,6 +1,7 @@
 """
 This simple script is a utility to make data cleaning easier.
 Write into CSV_PATH the location of the csv you want to clean, then start the script.
+The file to clean must be grouped by the unique spotify song.
 For every song recorder you will see a grid like so:
 
 original_name       found_name      spotify_id
@@ -22,7 +23,7 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = "../download_df.csv"
+CSV_PATH = ""
 
 
 def apply_sm(str_1: str, str_2: str) -> float:
@@ -42,11 +43,9 @@ def apply_sm(str_1: str, str_2: str) -> float:
 
 df = pd.read_csv(CSV_PATH, sep=";")
 df["artist_and_name"] = df["original_song_name"] + " " + df["original_artists_name"]
-
-ids_df = df.groupby("artist_and_name").first().reset_index()
-unique_names_df = ids_df[["original_song_name", "song_name",
-                          "song_id", "artist_and_name",
-                          "original_artists_name", "artists_names"]]
+unique_names_df = df[["original_song_name", "song_name",
+                      "song_id", "artist_and_name",
+                      "original_artists_name", "artists_names"]]
 
 sim_score = []
 unique_names_df.dropna(inplace=True)
@@ -83,7 +82,7 @@ for row_id, row in scores_df.iterrows():
     f_artists = row["artists_names"]
     score = row["score"]
     sp_id = row["song_id"]
-    if score >= 0.98:
+    if score <= 0.98:
         print()
         print()
         print(f"{o_name[:20]:20}\t{f_name[:20]:20}\t{sp_id}\n"
