@@ -2,6 +2,10 @@ import re
 import csv
 import os
 import lyricsgenius
+import time
+from random import randint
+from requests.exceptions import Timeout
+from tqdm import tqdm
 
 
 UNIQUE_SONG_PATH = "unique_songs_v2.csv"
@@ -10,7 +14,7 @@ curr_row = 0
 
 GENIUS_TOKEN = "kkAcDUBp0WMs-dHSKsmGZweB9xLdDBFmXy7NWaWFGBzC0w3HJDMJhNUhihFJns4n"
 
-genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True)
+genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True, verbose = False, excluded_terms = ["(Remix)"], skip_non_songs = True)
 
 try:
     with open("state.txt", "r", encoding="utf-8") as state:
@@ -35,7 +39,14 @@ def get_lyrics(song_name, artist_name, clean_filename):
     """
     This function retrieves the songs' lyrics from genius using song_name and artist_name and write them on a txt
     """
-    song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
+    try:
+        song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
+    except Timeout:
+        randwait = randint(15, 30)
+        inner.set_description_str(f"Timeout: waiting for {randwait} secs...")
+        time.sleep(randwait)
+        song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
+
     if song_lyrics:
         path = os.path.join(DOWNLOAD_DIR, clean_filename)
         with open(path, "w", encoding="utf-8") as file_hand:
@@ -45,8 +56,12 @@ def get_lyrics(song_name, artist_name, clean_filename):
 
 
 with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
+    filelen = sum(1 for line in input_handle)
+
+with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
     my_reader = csv.reader(input_handle, delimiter=";")
-    for i in range(curr_row):
+
+    for i in range(1,curr_row):
         next(my_reader, None)
 
     total_saved = 0
@@ -57,21 +72,21 @@ with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
     for the song_name; and the columns "original_artists_name" and "artist_names" for artist_name. 
     In this way we maximize our chances to find the songs lyrics on genius
     """
+    outer = tqdm(total=filelen - curr_row, desc='Status', position=0)
+    inner = tqdm(desc='Getting song:', position=1, bar_format='{desc}')
     for id, original_song_name, original_artists_name, song_name, artists_names in my_reader:
-
+        time.sleep(randint(1, 2))
         artists_names = unpack_artist_list(artists_names)
         clean_filename = re.sub(r"[><:\"?*|\\/]", "", f"{song_name}_{artists_names[0]}.txt")
-
+        inner.set_description_str(f"Getting song: {song_name} by {artists_names[0]}")
+        outer.update(1)
         lyric = get_lyrics(song_name, artists_names[0], clean_filename)
 
         if not lyric:
             total_not_found += 1
             list_not_found.append(song_name + "_" + artists_names[0])
-            print("Total songs not found: ", total_not_found)
             continue
-
         total_saved += 1
-        print("Total songs saved: ", total_saved)
 
 
     print("Finished!")
@@ -81,7 +96,7 @@ with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
 
 
 with open("list_total_lyrics_not_found.txt", "w", encoding="utf-8") as file1:
-    file1.write(list_not_found)
+    file1.write("\n".join(list_not_found))
 
 
 
