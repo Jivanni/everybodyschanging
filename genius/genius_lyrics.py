@@ -19,7 +19,7 @@ except FileNotFoundError:
     with open("state.txt", "w", encoding="utf-8") as state:
         state.write("0")
 
-print(curr_row)
+print(f"Resuming from row {curr_row}")
 
 def unpack_artist_list(str_repr):
     output = []
@@ -31,13 +31,13 @@ def unpack_artist_list(str_repr):
         return output
 
 
-def get_lyrics(song_name, artist_name):
+def get_lyrics(song_name, artist_name, clean_filename):
     """
     This function retrieves the songs' lyrics from genius using song_name and artist_name and write them on a txt
     """
     song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
     if song_lyrics:
-        path = os.path.join(DOWNLOAD_DIR, re.sub(r"[><:\"?*|\\/]", "", f"{song_name}_{artist_name}.txt"))
+        path = os.path.join(DOWNLOAD_DIR, clean_filename)
         with open(path, "w", encoding="utf-8") as file_hand:
             file_hand.write(song_lyrics.lyrics)
         return True
@@ -60,7 +60,9 @@ with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
     for id, original_song_name, original_artists_name, song_name, artists_names in my_reader:
 
         artists_names = unpack_artist_list(artists_names)
-        lyric = get_lyrics(song_name, artists_names[0])
+        clean_filename = re.sub(r"[><:\"?*|\\/]", "", f"{song_name}_{artists_names[0]}.txt")
+
+        lyric = get_lyrics(song_name, artists_names[0], clean_filename)
 
         if not lyric:
             total_not_found += 1
