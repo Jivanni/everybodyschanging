@@ -48,7 +48,7 @@ unique_names_df = df[["original_song_name", "song_name",
                       "original_artists_name", "artists_names"]]
 
 sim_score = []
-unique_names_df.dropna(inplace=True)
+unique_names_df = unique_names_df.dropna().copy()
 for unique_names_id, row_series in unique_names_df.iterrows():
     o_name = re.sub(r"[\W_]+", " ",
                     row_series["original_song_name"]).lower().strip()
