@@ -8,10 +8,13 @@ conversion_dict[w_id] = {"info": sp_info, "feats": features_list}
 """
 import json
 from typing import Optional, Dict
+
+from tqdm import tqdm
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-CONVERSION_TEXT_PATH = "./conversion.txt"
+CONVERSION_TEXT_PATH = "/home/giuseppe/Documents/Master/progetto/data/"\
+                       "check_data_utils/conversion_id.txt"
 
 
 def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
@@ -59,12 +62,21 @@ with open(CONVERSION_TEXT_PATH, "r", encoding="utf8") as conv:
         wrong_ids.append(old_id.strip())
         right_ids.append(new_id.strip())
 
-right_sp_info = sp.tracks(right_ids)
-features_list = sp.audio_features(right_ids)
+right_sp_info = []
+right_audio_features = []
+for right_id in tqdm(right_ids):
+
+    if len(right_id) != 0:
+        right_sp_info.append(sp.track(right_id))
+        right_audio_features += sp.audio_features(right_id)
+    else:
+        right_sp_info.append(None)
+        right_audio_features += [None]
 
 conversion_dict = {}
-for w_id, sp_info, features in zip(wrong_ids, right_sp_info, features_list):
-    conversion_dict[w_id] = {"info": sp_info, "feats": features_list}
+for w_id, sp_info, features in zip(wrong_ids, right_sp_info,
+                                   right_audio_features):
+    conversion_dict[w_id] = {"info": sp_info, "feats": right_audio_features}
 
 with open("conversion.json", "w", encoding="utf8") as outfile:
     json.dump(conversion_dict, outfile)

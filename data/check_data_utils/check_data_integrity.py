@@ -23,7 +23,22 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = ""
+CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df.csv"
+
+
+def group_by_names(ungrouped_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Returns a dataframe grouped by artist and song names
+    Parameters
+    ----------
+    ungrouped_df :  pd.DataFrame
+
+    Returns
+    -------
+    pd.DataFrame
+
+    """
+    return ungrouped_df.groupby("artist_and_name").first().reset_index()
 
 
 def apply_sm(str_1: str, str_2: str) -> float:
@@ -43,6 +58,7 @@ def apply_sm(str_1: str, str_2: str) -> float:
 
 df = pd.read_csv(CSV_PATH, sep=";")
 df["artist_and_name"] = df["original_song_name"] + " " + df["original_artists_name"]
+df = group_by_names(df)
 unique_names_df = df[["original_song_name", "song_name",
                       "song_id", "artist_and_name",
                       "original_artists_name", "artists_names"]]
