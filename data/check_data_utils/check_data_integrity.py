@@ -23,7 +23,8 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df.csv"
+CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_v3.csv"
+ONLY_GRAPH = True
 
 
 def group_by_names(ungrouped_df: pd.DataFrame) -> pd.DataFrame:
@@ -89,30 +90,30 @@ fig, ax = plt.subplots(figsize=plt.figaspect(1))
 ax.hist(scores_df["score"], bins=5)
 ax.set(xlabel="similarity", ylabel="count")
 plt.savefig("similarity_score_QC.png", dpi=300, transparent=True)
+if not ONLY_GRAPH:
+    conversion_list = []
+    for row_id, row in scores_df.iterrows():
+        o_name = row["original_song_name"]
+        f_name = row["song_name"]
+        o_artists = row["original_artists_name"]
+        f_artists = row["artists_names"]
+        score = row["score"]
+        sp_id = row["song_id"]
+        if score <= 0.98:
+            print()
+            print()
+            print(f"{o_name[:20]:20}\t{f_name[:20]:20}\t{sp_id}\n"
+                  f"{o_artists[:20]:20}\t{f_artists[:20]:20}\t"
+                  f"\t{score:.3}")
+            new_id = input("Is this id valid? ")
+            if new_id == "quit!":
+                break
 
-conversion_list = []
-for row_id, row in scores_df.iterrows():
-    o_name = row["original_song_name"]
-    f_name = row["song_name"]
-    o_artists = row["original_artists_name"]
-    f_artists = row["artists_names"]
-    score = row["score"]
-    sp_id = row["song_id"]
-    if score <= 0.98:
-        print()
-        print()
-        print(f"{o_name[:20]:20}\t{f_name[:20]:20}\t{sp_id}\n"
-              f"{o_artists[:20]:20}\t{f_artists[:20]:20}\t"
-              f"\t{score:.3}")
-        new_id = input("Is this id valid? ")
-        if new_id == "quit!":
-            break
+            if new_id == "???":
+                conversion_list.append((sp_id, ""))
+            elif len(new_id) != 0:
+                conversion_list.append((sp_id, new_id))
 
-        if new_id == "???":
-            conversion_list.append((sp_id, ""))
-        elif len(new_id) != 0:
-            conversion_list.append((sp_id, new_id))
-
-with open("conversion_id.txt", "w", encoding="utf8") as conv_file:
-    for conv_tuple in conversion_list:
-        conv_file.write(f"{conv_tuple[0]},{conv_tuple[1]}\n")
+    with open("conversion_id.txt", "w", encoding="utf8") as conv_file:
+        for conv_tuple in conversion_list:
+            conv_file.write(f"{conv_tuple[0]},{conv_tuple[1]}\n")
