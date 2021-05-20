@@ -67,8 +67,11 @@ right_audio_features = []
 for right_id in tqdm(right_ids):
 
     if len(right_id) != 0:
-        right_sp_info.append(sp.track(right_id))
-        right_audio_features += sp.audio_features(right_id)
+        try:
+            right_sp_info.append(sp.track(right_id))
+            right_audio_features += sp.audio_features(right_id)
+        except:
+            print(f"{right_id}\tnot found")
     else:
         right_sp_info.append(None)
         right_audio_features += [None]
