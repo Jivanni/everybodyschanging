@@ -1,0 +1,5 @@
+data
+node_modules
+models
+*.pyc
+.DS_Store
