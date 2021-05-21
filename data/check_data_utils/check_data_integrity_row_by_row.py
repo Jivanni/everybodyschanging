@@ -48,6 +48,8 @@ with open(CSV_PATH, "r", encoding="utf8") as data_file:
 
                 if new_id == "quit!":
                     break
+                elif new_id == "???":
+                    new_id = "None"
 
                 redundant_conversion_dict[combined_originals] = new_id
                 print()
