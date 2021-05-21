@@ -8,7 +8,7 @@ from difflib import SequenceMatcher
 import csv
 import json
 
-CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_v3.csv"
+CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/check_data_utils/xaa"
 ONLY_GRAPH = True
 
 
