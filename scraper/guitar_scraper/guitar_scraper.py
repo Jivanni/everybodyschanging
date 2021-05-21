@@ -5,13 +5,24 @@ import requests
 import os
 import time
 
+import csv
+from typing import List
+
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from tqdm import tqdm
+
+
+chrome_options = webdriver.ChromeOptions()
+#chrome_options.add_argument('--headless')
+chrome_options.add_argument('window-size=1920x1080')
+chrome_options.add_argument("--user-data-dir=user");
+driver = webdriver.Chrome(options=chrome_options)
+
 DOWNLOAD_DIR = "downloads"
 HTMLS = "lyrics"
 TYPE = "title"
 URL = f"https://www.ultimate-guitar.com/search.php"
-
-
-GUITAR_SESSION = requests.Session()
 
 REG = re.compile(r"[\/\"\\]")
 
@@ -21,7 +32,7 @@ try:
 except FileExistsError:
     pass
 
-def get_html(session, url) -> BeautifulSoup:
+def get_html(driver, url) -> BeautifulSoup:
     """
     This function retrieves an html file given an url
     Parameters
@@ -33,12 +44,12 @@ def get_html(session, url) -> BeautifulSoup:
     -------
     BeautifulSoup() object
     """
-    page_source = session.get(url=URL, params=PARAMS)
-    time.sleep(2)
+    driver.get(url)
+    driver.implicitly_wait(2)
+    page_source = driver.page_source
+    return BeautifulSoup(page_source, 'html.parser')
 
-    return BeautifulSoup(page_source.content, 'html.parser')
-
-artists = pd.read_csv("../wiki_scraper/unique_songs.csv", sep=";")
+artists = pd.read_csv("unique_songs_v2.csv", sep=";")
 found = 0
 not_found = 0
 
@@ -49,9 +60,9 @@ PARAMS = {
     "value": "ciccio"
 }
 
-
-pag = get_html(GUITAR_SESSION, "Ciccio")
+test = "https://tabs.ultimate-guitar.com/tab/olivia-rodrigo/good-4-u-chords-3705839"
+pag = get_html(driver, test)
 
 #_3uKbA
-
-session.get("https://www.ultimate-guitar.com/search.php?search_type=title&value=ciccio").content
+#_3rlxz
+#GUITAR_SESSION.get("https://www.ultimate-guitar.com/search.php?search_type=title&value=ciccio").content
