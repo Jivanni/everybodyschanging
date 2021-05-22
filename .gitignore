@@ -157,3 +157,5 @@ fimi_scraper/.idea/inspectionProfiles/profiles_settings.xml
 fimi_scraper/.idea/fimi_scraper.iml
 .vscode/settings.json
 scraper/guitar_scraper/user/
+*.model
+*.tsv

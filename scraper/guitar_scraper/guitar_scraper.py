@@ -14,15 +14,14 @@ from tqdm import tqdm
 
 
 chrome_options = webdriver.ChromeOptions()
-#chrome_options.add_argument('--headless')
-chrome_options.add_argument('window-size=1920x1080')
+chrome_options.add_argument('--headless')
 chrome_options.add_argument("--user-data-dir=user");
 driver = webdriver.Chrome(options=chrome_options)
 
 DOWNLOAD_DIR = "downloads"
 HTMLS = "lyrics"
 TYPE = "title"
-URL = f"https://www.ultimate-guitar.com/search.php"
+ENDPOINT = f"https://www.ultimate-guitar.com/search.php"
 
 REG = re.compile(r"[\/\"\\]")
 
@@ -46,8 +45,12 @@ def get_html(driver, url) -> BeautifulSoup:
     """
     driver.get(url)
     driver.implicitly_wait(2)
-    page_source = driver.page_source
-    return BeautifulSoup(page_source, 'html.parser')
+    text = driver.find_element_by_xpath("//code/pre").get_attribute('innerHTML')
+    return BeautifulSoup(text, 'html.parser')
+
+def getnotes(soup):
+    notes = pag.findAll(style="color: rgb(0, 0, 0);")
+    return str([note.text.strip() for note in notes])
 
 artists = pd.read_csv("unique_songs_v2.csv", sep=";")
 found = 0
@@ -55,14 +58,19 @@ not_found = 0
 
 pairs = []
 
-PARAMS = {
-    "search_type": TYPE,
-    "value": "ciccio"
-}
+html_reg_repl = re.compile(r"\s")
 
-test = "https://tabs.ultimate-guitar.com/tab/olivia-rodrigo/good-4-u-chords-3705839"
-pag = get_html(driver, test)
+def search(driver, artist_song):
+    artist_song = html_reg_repl.sub("%20", artist_song)
+    print(artist_song)
+    query_string = f"?search_type=title&value={artist_song}"
+    driver.get(ENDPOINT + query_string)
+    driver.implicitly_wait(2)
+    return BeautifulSoup(driver.page_source, 'html.parser')
 
-#_3uKbA
-#_3rlxz
-#GUITAR_SESSION.get("https://www.ultimate-guitar.com/search.php?search_type=title&value=ciccio").content
+
+
+#test = "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589"
+#pag = get_html(driver, test)
+#print(getnotes(pag))
+#driver.close()
