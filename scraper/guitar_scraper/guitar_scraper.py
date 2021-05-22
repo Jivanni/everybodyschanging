@@ -22,6 +22,7 @@ DOWNLOAD_DIR = "downloads"
 HTMLS = "lyrics"
 TYPE = "title"
 ENDPOINT = f"https://www.ultimate-guitar.com/search.php"
+QUERY_PARAMS = "?search_type=title&value="
 
 REG = re.compile(r"[\/\"\\]")
 
@@ -31,7 +32,7 @@ try:
 except FileExistsError:
     pass
 
-def get_html(driver, url) -> BeautifulSoup:
+def get_page(driver, url) -> BeautifulSoup:
     """
     This function retrieves an html file given an url
     Parameters
@@ -45,12 +46,24 @@ def get_html(driver, url) -> BeautifulSoup:
     """
     driver.get(url)
     driver.implicitly_wait(2)
-    text = driver.find_element_by_xpath("//code/pre").get_attribute('innerHTML')
-    return BeautifulSoup(text, 'html.parser')
+    return driver
 
-def getnotes(soup):
-    notes = pag.findAll(style="color: rgb(0, 0, 0);")
+def getnotes(driver):
+    body = driver.find_element_by_tag_name('body')
+    text = body.find_element_by_xpath("//code/pre").get_attribute('innerHTML')
+    soup = BeautifulSoup(text, 'html.parser')
+    notes = soup.findAll(style="color: rgb(0, 0, 0);")
     return str([note.text.strip() for note in notes])
+
+def search_song(driver, artist_and_song):
+    artist_and_song = html_reg_repl.sub("%20", artist_and_song)
+    print(artist_and_song)
+    query_string = ENDPOINT + QUERY_PARAMS + artist_and_song
+    get_page(driver, query_string)
+    return BeautifulSoup(driver.find_element_by_tag_name('body').text, 'html.parser')
+
+def evaulate_query()
+
 
 artists = pd.read_csv("unique_songs_v2.csv", sep=";")
 found = 0
@@ -60,17 +73,8 @@ pairs = []
 
 html_reg_repl = re.compile(r"\s")
 
-def search(driver, artist_song):
-    artist_song = html_reg_repl.sub("%20", artist_song)
-    print(artist_song)
-    query_string = f"?search_type=title&value={artist_song}"
-    driver.get(ENDPOINT + query_string)
-    driver.implicitly_wait(2)
-    return BeautifulSoup(driver.page_source, 'html.parser')
 
-
-
-#test = "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589"
+test = "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589"
 #pag = get_html(driver, test)
 #print(getnotes(pag))
 #driver.close()
