@@ -8,7 +8,7 @@ from difflib import SequenceMatcher
 import csv
 import json
 
-CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/check_data_utils/xaa"
+CSV_PATH = "../cleaned_df_FINALISSIMO.csv"
 ONLY_GRAPH = True
 
 
@@ -53,7 +53,7 @@ with open(CSV_PATH, "r", encoding="utf8") as data_file:
 
                 redundant_conversion_dict[combined_originals] = new_id
                 print()
-    with open("redundant_conversion.json", "w", encoding="utf8") as outfile:
+    with open("../../redundant_conversion_final.json", "w", encoding="utf8") as outfile:
         json.dump(redundant_conversion_dict, outfile)
 
     print(f"CONGRATULATIONS! You parsed all alone {len(redundant_conversion_dict)}"

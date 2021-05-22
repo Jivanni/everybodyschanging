@@ -20,9 +20,9 @@ logging.basicConfig(format='%(levelname)s\t%(message)s',
                     filemode="w",
                     level=logging.INFO)
 
-DIRTY_CSV = "data/cleaned_df_v8.csv"
-CLEAN_CSV = "data/cleaned_df_v9.csv"
-CONVERSION_JSON = "data/check_data_utils/redundant_conversion.json"
+DIRTY_CSV = "data/cleaned_df_FINALISSIMO.csv"
+CLEAN_CSV = "data/cleaned_df_FINALISSIMISSIMO.csv"
+CONVERSION_JSON = "redundant_conversion_final.json"
 TOTAL_LINES = get_num_lines(DIRTY_CSV)
 
 sp_keys = get_spotify_keys("./spotify_info/spotify_keys.txt")
@@ -54,7 +54,41 @@ with open(DIRTY_CSV, "r",
             right_id = conversion_dict[combined_originals]
             # if the id is None than write the row as it is and skip this iteration
             if right_id == "None":
-                clean_writer.writerow(row)
+                clean_writer.writerow([
+                    row[0],
+                    row[1],
+                    row[2],
+                    row[3],
+                    row[4],
+                    row[5],
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    row[14],
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ])
                 continue
             # empty id means that the original id was right
             if right_id == "":

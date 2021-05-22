@@ -23,8 +23,8 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_v3.csv"
-ONLY_GRAPH = True
+CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_FINALISSIMISSIMO.csv"
+ONLY_GRAPH = False
 
 
 def group_by_names(ungrouped_df: pd.DataFrame) -> pd.DataFrame:
@@ -99,7 +99,7 @@ if not ONLY_GRAPH:
         f_artists = row["artists_names"]
         score = row["score"]
         sp_id = row["song_id"]
-        if score <= 0.98:
+        if score <= 0.28:
             print()
             print()
             print(f"{o_name[:20]:20}\t{f_name[:20]:20}\t{sp_id}\n"
