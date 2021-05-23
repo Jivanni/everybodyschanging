@@ -7,6 +7,7 @@
 *.csv
 *.log
 *.json
+*.html
 test*
 
 # Byte-compiled / optimized / DLL files
@@ -157,3 +158,6 @@ fimi_scraper/.idea/inspectionProfiles/Project_Default.xml
 fimi_scraper/.idea/inspectionProfiles/profiles_settings.xml
 fimi_scraper/.idea/fimi_scraper.iml
 .vscode/settings.json
+scraper/guitar_scraper/user/
+*.model
+*.tsv
