@@ -8,13 +8,13 @@ from requests.exceptions import Timeout
 from tqdm import tqdm
 
 
-UNIQUE_SONG_PATH = "unique_songs_v2.csv"
+UNIQUE_SONG_PATH = "unique_songs_FINALISSIMISSIMO_2006_2021.csv"
 DOWNLOAD_DIR = "lyrics"
 curr_row = 0
 
 GENIUS_TOKEN = "kkAcDUBp0WMs-dHSKsmGZweB9xLdDBFmXy7NWaWFGBzC0w3HJDMJhNUhihFJns4n"
 
-genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True, verbose = False, excluded_terms = ["(Remix)"], skip_non_songs = True)
+genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True, verbose = False, skip_non_songs = True)
 
 try:
     with open("state.txt", "r", encoding="utf-8") as state:
@@ -42,7 +42,7 @@ def get_lyrics(song_name, artist_name, clean_filename):
     try:
         song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
     except Timeout:
-        randwait = randint(15, 30)
+        randwait = randint(60, 100)
         inner.set_description_str(f"Timeout: waiting for {randwait} secs...")
         time.sleep(randwait)
         song_lyrics = genius.search_song(song_name, artist_name, get_full_info=True)
@@ -74,7 +74,7 @@ with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
     """
     outer = tqdm(total=filelen - curr_row, desc='Status', position=0)
     inner = tqdm(desc='Getting song:', position=1, bar_format='{desc}')
-    for id, original_song_name, original_artists_name, song_name, artists_names in my_reader:
+    for id, song_name, artists_names in my_reader:
         time.sleep(randint(1, 2))
         artists_names = unpack_artist_list(artists_names)
         clean_filename = re.sub(r"[><:\"?*|\\/]", "", f"{song_name}_{artists_names[0]}.txt")

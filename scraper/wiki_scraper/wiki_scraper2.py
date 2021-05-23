@@ -34,7 +34,7 @@ def get_html(session, url) -> BeautifulSoup:
     doc.raise_for_status()
     return doc.text
 
-artists = pd.read_csv("unique_artists.csv", sep=";")
+artists = pd.read_csv("unique_artists_FINALISSIMISSIMO_2006_2021.csv", sep=";")
 found = 0
 not_found = 0
 
@@ -62,6 +62,6 @@ for artist in artists["artists_names"]:
 
 WIKIAPI_SESSION.close()
 WIKIPEDIA_SESSION.close()
-pd.DataFrame(pairs, columns=["spotyname", "wikipagename"]).to_csv("wikipages.csv", sep=";", index=False)
+pd.DataFrame(pairs, columns=["spotyname", "wikipagename_it"]).to_csv("wikipages_it.csv", sep=";", index=False)
 
 print(f"total of {found} artists found and {not_found} not found")

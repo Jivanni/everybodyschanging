@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-PATH_TO_FILE = "../download_df.csv"
+PATH_TO_FILE = "cleaned_df_FINALISSIMISSIMO_2006_2021.csv"
 
 similarity_songs_list = []
 similarity_artists_list = []
