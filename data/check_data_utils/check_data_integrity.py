@@ -23,7 +23,7 @@ import re
 import pandas as pd
 import matplotlib.pyplot as plt
 
-CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_FINALISSIMISSIMO.csv"
+CSV_PATH = "/home/giuseppe/Documents/Master/progetto/data/cleaned_df_FINALISSIMISSIMO_2006_2021.csv"
 ONLY_GRAPH = False
 
 
@@ -99,7 +99,7 @@ if not ONLY_GRAPH:
         f_artists = row["artists_names"]
         score = row["score"]
         sp_id = row["song_id"]
-        if score <= 0.28:
+        if score <= 0.58:
             print()
             print()
             print(f"{o_name[:20]:20}\t{f_name[:20]:20}\t{sp_id}\n"
