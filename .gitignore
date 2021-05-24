@@ -161,3 +161,4 @@ fimi_scraper/.idea/fimi_scraper.iml
 scraper/guitar_scraper/user/
 *.model
 *.tsv
+analysis/lyrics/songlyrics/lyrics.zip

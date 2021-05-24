@@ -73,19 +73,19 @@ class Model(object):
 
     def __init__(self, filename):
         try:
-            self.model = gensim.models.Word2Vec.load(filename).wv
+            self.model = gensim.models.keyedvectors.KeyedVectors.load(filename)
         except cPickle.UnpicklingError:
-            load = gensim.models.Word2Vec.load_word2vec_format
+            load = gensim.models.keyedvectors.KeyedVectors.load_word2vec_format
             self.model = load(filename, binary=True).wv
 
     def autocomplete(self, query, limit):
         words = []
         i = 0
-        for word in self.model.vocab:
+        for word in self.model.key_to_index:
             if word.startswith(query):
                 words.append({
                     'word': word,
-                    'count': self.model.vocab[word].count})
+                    'count': self.model.key_to_index[word].count})
                 i += 1
 
         words = sorted(words, key=lambda x: x['count'], reverse=True)
@@ -126,7 +126,7 @@ class Model(object):
         else:
             exploration.labels, exploration.vectors, sample_rate = self._all_vectors(limit)
             exploration.stats['sample_rate'] = sample_rate
-        exploration.stats['vocab_size'] = len(self.model.vocab)
+        exploration.stats['vocab_size'] = len(self.model.key_to_index)
         exploration.stats['num_vectors'] = len(exploration.vectors)
         return exploration
 
@@ -157,14 +157,14 @@ class Model(object):
     def _all_vectors(self, limit):
         sample = 1
         if limit > -1:
-            sample = int(math.ceil(len(self.model.vocab) / limit))
-        sample_rate = float(limit) / len(self.model.vocab)
+            sample = int(math.ceil(len(self.model.key_to_index) / limit))
+        sample_rate = float(limit) / len(self.model.key_to_index)
         print('Model#_most_similar_vectors' +
               'sample={}, sample_rate={}, limit={}'.format(sample, sample_rate, limit))
         labels = []
         vectors = []
         i = 0
-        for word in self.model.vocab:
+        for word in self.model.key_to_index:
             if (i % sample) == 0:
                 vectors.append(self.model[word])
                 labels.append(word)
