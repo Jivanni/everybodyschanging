@@ -8,13 +8,13 @@ from requests.exceptions import Timeout
 from tqdm import tqdm
 
 
-UNIQUE_SONG_PATH = "unique_songs_FINALISSIMISSIMO_2006_2021.csv"
+UNIQUE_SONG_PATH = "../../../analysis/lyrics/songlyrics/defective_cluster.csv"
 DOWNLOAD_DIR = "lyrics"
 curr_row = 0
 
 GENIUS_TOKEN = "kkAcDUBp0WMs-dHSKsmGZweB9xLdDBFmXy7NWaWFGBzC0w3HJDMJhNUhihFJns4n"
 
-genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True, verbose = False, skip_non_songs = True)
+genius = lyricsgenius.Genius(GENIUS_TOKEN, remove_section_headers=True, verbose = True, skip_non_songs = True)
 
 try:
     with open("state.txt", "r", encoding="utf-8") as state:
@@ -74,13 +74,13 @@ with open(UNIQUE_SONG_PATH, 'r', encoding="utf-8") as input_handle:
     """
     outer = tqdm(total=filelen - curr_row, desc='Status', position=0)
     inner = tqdm(desc='Getting song:', position=1, bar_format='{desc}')
-    for id, song_name, artists_names in my_reader:
+    for id, song_name, artists_names, song_name_less in my_reader:
         time.sleep(randint(1, 2))
         artists_names = unpack_artist_list(artists_names)
         clean_filename = re.sub(r"[><:\"?*|\\/]", "", f"{song_name}_{artists_names[0]}.txt")
         inner.set_description_str(f"Getting song: {song_name} by {artists_names[0]}")
         outer.update(1)
-        lyric = get_lyrics(song_name, artists_names[0], clean_filename)
+        lyric = get_lyrics(song_name_less, artists_names[0], clean_filename)
 
         if not lyric:
             total_not_found += 1

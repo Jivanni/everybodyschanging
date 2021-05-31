@@ -163,4 +163,3 @@ scraper/guitar_scraper/user/
 *.tsv
 analysis/lyrics/songlyrics/lyrics.zip
 analysis/lyrics/fastext_models/lid.176.bin
-analysis/lyrics/fasttext_models/lid.176.bin
