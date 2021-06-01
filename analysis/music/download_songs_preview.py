@@ -3,15 +3,22 @@ this script takes a chart file containing the spotify id of different songs and
 returns a file containing just the song id and the path of the file
 """
 import os
-import requests
+import re
 import csv
+import logging
 from typing import Optional, Dict
 
+import requests
 import pandas as pd
 from tqdm import tqdm
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+
+logging.basicConfig(format='%(levelname)s\t%(message)s',
+                    filename="dw_songs.log",
+                    filemode="w",
+                    level=logging.INFO)
 
 DOWNLOAD_FOLDER = "preview_download"
 
@@ -47,31 +54,47 @@ def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
-keys = get_spotify_keys("../initial_data_gathering/spotify_info/spotify_keys.txt")
+keys = get_spotify_keys("../../initial_data_gathering/spotify_info/spotify_keys_2.txt")
 
 # Create credential for the api
 credentials = SpotifyClientCredentials(client_id=keys["clientID"],
                                        client_secret=keys["client_secret"])
 # Instantiate the API
-sp = spotipy.Spotify(client_credentials_manager=credentials)
+sp = spotipy.Spotify(auth_manager=credentials)
 
-df = pd.read_csv("../data/final_df.csv", sep=";")
+df = pd.read_csv("../../data/final_df.csv", sep=";",
+                 low_memory=False, parse_dates=True)
 only_songs = df.groupby("id").first().reset_index()
 
+none_counter = 0
+regex = re.compile(".*?\((.*?)\)")
 with open("corrispondence_songs.csv", "w") as corr:
     corr_writer = csv.writer(corr, delimiter=",")
     corr_writer.writerow(["id", "filename"])
-    for df_id, df_row in tqdm(only_songs.iterrows()):
-        song_id = df_row["id"]
-        sp_api_output = sp.track(song_id)
-        preview_url = sp_api_output["preview_url"]
+    for df_id, df_row in tqdm(only_songs.iterrows(),
+                              total=only_songs.shape[0]):
+        name_file = df_row["song_name"].replace("/", "") \
+                                       .strip() \
+                                       .replace(" ", "_")
 
-        name_file = df_row["song_name"].replace(" ", "_")
+        name_file = re.sub(r'\([^)]*\)', '', name_file)
         name_file += ".mp3"
-        req = requests.get(es_url, allow_redirects=True)
+        file_path = os.path.join(DOWNLOAD_FOLDER, name_file)
+        if os.path.exists(file_path):
+            continue
 
-        file_path = os.path.join(DOWNLOAD_FOLDER,name_file)
+        song_id = df_row["id"]
+        sp_api_output = sp.track(song_id, market="IT")
+        preview_url = sp_api_output["preview_url"]
+        if preview_url is None:
+            none_counter += 1
+            logging.warning("%s\t not found", song_id)
+            continue
+        req = requests.get(preview_url, allow_redirects=True)
+
         with open(file_path, 'wb') as f:
             f.write(req.content)
 
-        corr.writerow([song_id, name_file])
+        corr_writer.writerow([song_id, name_file])
+
+print(f"not cannot find {none_counter} songs. Total: {only_songs.shape[0]}")
