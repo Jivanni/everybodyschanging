@@ -13,3 +13,6 @@ Are missing the first 17 weeks from 2006, 2 weeks from 2008, 4 weeks from 2009, 
 
 ### Clean data
 We saw that a lot of songs that the api found were wrong using difflib. Therefore, we manually found the right spotify ID and replace them
+
+### Music analysis
+Missing 68 songs of 5840
