@@ -7,7 +7,7 @@ from difflib import SequenceMatcher
 
 import pandas as pd
 
-DATA_PATH = "../cleaned_df_FINALISSIMISSIMO_2006_2021.csv"
+DATA_PATH = "../cleaned_df_v2.csv"
 
 
 def apply_sm(str_1: str, str_2: str) -> float:
@@ -25,8 +25,8 @@ def apply_sm(str_1: str, str_2: str) -> float:
     return SequenceMatcher(None, str_1, str_2).ratio()
 
 
-df = pd.read_csv(DATA_PATH, sep=";", parse_dates=True,
-                 keep_default_na=False)
+df = pd.read_csv(DATA_PATH, sep=";", parse_dates=False,
+                 keep_default_na=False, low_memory=False)
 # remove all rows not found
 none_rows = [row_id
              for row_id, row in df.iterrows()
@@ -49,8 +49,12 @@ spotify_features = [
                        for column in df.columns
                        if column not in scraper_features
                    ] + ["song_id"]
+# Create and save both data frames
 scraper_df = df[scraper_features]
+scraper_df.to_csv("scraper_df.csv", sep=";")
 spotify_df = df[spotify_features].groupby("song_id").first()
+spotify_df.to_csv("spotify_df.csv", sep=";")
+
 
 g_scraper_df = scraper_df.groupby("song_id").first()
 conversion_dict = {}
@@ -69,7 +73,7 @@ for spotify_id, spotify_row in spotify_df.iterrows():
     f_track_name = re.sub(r"[\W_]+", " ",
                           f_track_name).lower().strip()
 
-    sm = apply_sm(o_artist_name, f_artist_name)
+    sm = apply_sm(o_track_name, f_track_name)
 
     if sm < 0.6:
         print(f"\n{c_date}\n"
@@ -83,7 +87,7 @@ for spotify_id, spotify_row in spotify_df.iterrows():
         elif len(new_id) == 0:
             pass
         else:
-            conversion_dict[spotify_id] = ""
+            conversion_dict[spotify_id] = None
 
 with open("ultimate_conversion_dict.json", "w") as c_json:
     json.dump(conversion_dict, c_json)

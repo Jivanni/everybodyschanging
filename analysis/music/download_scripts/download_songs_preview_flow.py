@@ -1,3 +1,11 @@
+"""
+This script loads a csv containing the charts parsed from spotify, group them
+by Spotify ID and then downloads the Spotify preview for the given track.
+
+This script uses the code authorizaton flow API, I found the authentication
+code on StackOverflow. I don't know how it works, I don't know why it works
+but it works. And that's good enough for me.
+"""
 import os
 import re
 import csv
@@ -17,6 +25,8 @@ logging.basicConfig(format='%(levelname)s\t%(message)s',
                     filemode="w",
                     level=logging.INFO)
 
+DATA_PATH = "../../../data/cleaned_df_v2.csv"
+DOWNLOAD_FOLDER = "../preview_download"
 
 def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
                                                                         str]]:
@@ -48,7 +58,8 @@ def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
 
 redirect_URI = "http://localhost:8000"
 scope = "user-library-read"
-keys = get_spotify_keys("../../initial_data_gathering/spotify_info/spotify_keys_2.txt")
+keys = get_spotify_keys("../../../initial_data_gathering/"
+                        "spotify_info/spotify_keys_2.txt")
 
 sp_oauth = SpotifyOAuth(client_id=keys["clientID"],
                         client_secret=keys["client_secret"],
@@ -58,7 +69,8 @@ token_info = sp_oauth.get_cached_token()
 if not token_info:
     auth_url = sp_oauth.get_authorize_url()
     print(auth_url)
-    response = input('Paste the above link into your browser, then paste the redirect url here: ')
+    response = input('Paste the above link into your browser, '
+                     'then paste the redirect url here: ')
 
     code = sp_oauth.parse_response_code(response)
     token_info = sp_oauth.get_access_token(code)
@@ -67,10 +79,9 @@ token = token_info['access_token']
 
 sp = spotipy.Spotify(auth=token)
 
-DOWNLOAD_FOLDER = "preview_download"
 
 
-df = pd.read_csv("../../data/final_df.csv", sep=";",
+df = pd.read_csv(DATA_PATH, sep=";",
                  low_memory=False, parse_dates=True)
 only_songs = df.groupby("id").first().reset_index()
 
@@ -83,7 +94,7 @@ for df_id, df_row in tqdm(only_songs.iterrows(),
     if os.path.exists(file_path):
         continue
 
-    sp_api_output = sp.track(song_id, market="IT")
+    sp_api_output = sp.track(song_id)
     preview_url = sp_api_output["preview_url"]
     if preview_url is None:
         none_counter += 1

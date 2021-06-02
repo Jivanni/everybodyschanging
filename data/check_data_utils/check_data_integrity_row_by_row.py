@@ -8,7 +8,7 @@ from difflib import SequenceMatcher
 import csv
 import json
 
-CSV_PATH = "../cleaned_df_FINALISSIMISSIMO_2006_2021.csv"
+CSV_PATH = "../final_df.csv"
 ONLY_GRAPH = True
 
 
@@ -33,7 +33,7 @@ with open(CSV_PATH, "r", encoding="utf8") as data_file:
     next(reader)
 
     for row in reader:
-        sm = apply_sm(row[0].lower(), row[8][:len(row[0])].lower())
+        sm = apply_sm(row[1].lower(), row[10][:len(row[1])].lower())
 
         if sm < 0.8:
             o_track_name = row[0][:40]

@@ -20,33 +20,8 @@ credentials = SpotifyClientCredentials(client_id=keys["clientID"],
 sp = spotipy.Spotify(client_credentials_manager=credentials, retries=10)
 DATA_PATH = "../data/cleaned_df_FINALISSIMISSIMO_2006_2021.csv"
 
-df = pd.read_csv(DATA_PATH, sep=";", parse_dates=True,
-                 keep_default_na=False)
-# remove all rows not found
-print("Finding none values and removing them.")
-none_rows = [row_id
-             for row_id, row in df.iterrows()
-             if row["danceability"] == ""
-             ]
-df = df.drop(none_rows).copy()
-
-df["song_id"] = df["id"]
-
-# the old song_id was rubbish, in this way I give each song a numerical identifier
-pclass_dict = {o_id: n_id
-               for n_id, o_id in enumerate(df["song_id"].unique())}
-df["song_id"] = df["song_id"].map(pclass_dict)
-
-scraper_features = ['original_song_name', 'original_artists_name',
-                    'curr_rank', 'tag_fimi',
-                    'publisher', 'date_chart', "song_id"]
-spotify_features = [
-                       column
-                       for column in df.columns
-                       if column not in scraper_features
-                   ] + ["song_id"]
-scraper_df = df[scraper_features]
-spotify_df = df[spotify_features].groupby("song_id").first().reset_index()
+scraper_df = pd.read_csv("../data/check_data_utils/scraper_df.csv")
+spotify_df = pd.read_csv("../data/check_data_utils/spotify_df.csv")
 
 spotify_df["song_id"] = spotify_df["song_id"].astype(str)
 
