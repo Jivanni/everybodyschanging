@@ -84,8 +84,8 @@ def padder(array: np.array, num_missing_items: int,
 
 
 def log_spectrogram_extractor(signal_array: np.array,
-                              frame_size: int,
-                              hop_length: int) -> np.array:
+                              frame_size: int = 512,
+                              hop_length: int = 256) -> np.array:
     """
     log_spectrogram_extractor extract log spectrograms in Db from a time
     series signal
@@ -101,6 +101,8 @@ def log_spectrogram_extractor(signal_array: np.array,
 
 
 if __name__ == '__main__':
+    FRAME_SIZE = 512
+    HOP_LENGTH = 256
     SAMPLE_RATE = 22050
     DURATION = 30
     signals_list = []
@@ -119,7 +121,11 @@ if __name__ == '__main__':
         if len(signal) < N_EXPECT_SAMPLES:
             n_missing_samples = N_EXPECT_SAMPLES - len(signal)
             signal = padder(signal, n_missing_samples, how="right")
-        # normalize the array
+
+        signal = log_spectrogram_extractor(signal,
+                                           frame_size=FRAME_SIZE,
+                                           hop_length=HOP_LENGTH)
+                # normalize the array
         signal = minmax_normalizer(signal)
         # save to file using numpy
         output_name = os.path.join(OUTPUT_DIR, file[:-4] + ".npy")
