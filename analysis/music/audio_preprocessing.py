@@ -23,6 +23,7 @@ warnings.filterwarnings("ignore")
 
 DATA_DIR = "/home/giuseppe/Documents/Master/progetto/analysis/music" \
            "/preview_download/"
+OUTPUT_DIR = "preprocessed_data/"
 
 
 def loader(filepath: str,
@@ -34,14 +35,16 @@ def loader(filepath: str,
 
     Parameters
     ----------
-    filepath : 
-    s_r : 
-    length_in_s : 
-    mono : 
+    filepath : str
+        path of the file to load
+    s_r :
+    length_in_s :
+    mono : bool
+        Default True. True if you want to load the file in mono
 
     Returns
     -------
-    object
+    np.array
     """
     loaded_mp3, _ = librosa.load(filepath,
                                  sr=s_r,
@@ -87,7 +90,9 @@ def log_spectrogram_extractor(signal_array: np.array,
     log_spectrogram_extractor extract log spectrograms in Db from a time
     series signal
     """
-    stft = librosa.stft(signal_array, n_fft=frame_size, hop_length=hop_length)[:-1]
+    stft = librosa.stft(signal_array,
+                        n_fft=frame_size,
+                        hop_length=hop_length)[:-1]
     # (1+framesize/2, num_frames)
     # 1024 -> 513 -> 512
     spectrogram = np.abs(stft)
@@ -100,6 +105,10 @@ if __name__ == '__main__':
     DURATION = 30
     signals_list = []
     # loop over all the mp3 in the folder
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+
+
     for file in tqdm(os.listdir(DATA_DIR)):
         file_path = os.path.join(DATA_DIR, file)
         # load the mp3 with librosa
@@ -112,9 +121,8 @@ if __name__ == '__main__':
             signal = padder(signal, n_missing_samples, how="right")
         # normalize the array
         signal = minmax_normalizer(signal)
-        signals_list.append(signal)
+        # save to file using numpy
+        output_name = os.path.join(OUTPUT_DIR, file[:-4] + ".npy")
+        with open(output_name, "wb") as saver_handler:
+            np.save(saver_handler, signal)
 
-    # put together all the arrays and save them
-    np_to_save = np.stack(signals_list, axis=0)
-    with open("audio_spectrograms.npy", "wb") as saver_handler:
-        np.save(saver_handler, np_to_save)
