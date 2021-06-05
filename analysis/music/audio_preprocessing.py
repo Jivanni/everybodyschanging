@@ -21,8 +21,7 @@ import numpy as np
 
 warnings.filterwarnings("ignore")
 
-DATA_DIR = "/home/giuseppe/Documents/Master/progetto/analysis/music" \
-           "/preview_download/"
+DATA_DIR = "./music_data/"
 OUTPUT_DIR = "preprocessed_data/"
 
 
@@ -100,12 +99,21 @@ def log_spectrogram_extractor(signal_array: np.array,
     return log_spectrogram
 
 
+def mfcc_extractor(signal_array: np.array,
+                   frame_size: int = 512,
+                   hop_length: int = 256,
+                   s_r: int = 22050,
+                   n_mfcc: int = 20):
+    MFCCs = librosa.feature.mfcc(signal, s_r,
+                                 n_fft=frame_size, hop_length=hop_length)
+    return MFCCs
+
+
 if __name__ == '__main__':
     FRAME_SIZE = 512
     HOP_LENGTH = 256
     SAMPLE_RATE = 22050
-    DURATION = 30
-    signals_list = []
+    DURATION = 10
     # loop over all the mp3 in the folder
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
@@ -122,9 +130,9 @@ if __name__ == '__main__':
             n_missing_samples = N_EXPECT_SAMPLES - len(signal)
             signal = padder(signal, n_missing_samples, how="right")
 
-        signal = log_spectrogram_extractor(signal,
-                                           frame_size=FRAME_SIZE,
-                                           hop_length=HOP_LENGTH)
+        signal = mfcc_extractor(signal,
+                                frame_size=FRAME_SIZE,
+                                hop_length=HOP_LENGTH)
                 # normalize the array
         signal = minmax_normalizer(signal)
         # save to file using numpy
