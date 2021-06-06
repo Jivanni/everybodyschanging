@@ -1,10 +1,10 @@
 import re
-from bs4 import BeautifulSoup
 import pandas as pd
 import requests
 import os
 import json
 import time
+from tqdm import tqdm
 
 ROOT = "https://musicbrainz.org/ws/2/artist?"
 LOOKUP = "https://musicbrainz.org/ws/2/artist/"
@@ -14,7 +14,7 @@ params = {
     "fmt" : "json"
 }
 params_search = {
-    "inc" : "aliases+recordings+releases+release-groups+works",
+    "inc" : "aliases+recordings+releases+release-groups+works+annotation+tags+ratings+genres+area-rels+artist-rels+event-rels+instrument-rels+label-rels+place-rels+recording-rels+release-rels+release-group-rels+series-rels+url-rels+work-rels",
     "fmt" : "json"
 }
 
@@ -48,7 +48,11 @@ def artist_lookup(json):
     data = resp.json()
     return data
 
-artists_list = pd.read_csv("missed_timig.csv", sep = ";")
+artists_list = pd.read_csv("nas.csv", sep = ";")
+
+
+outer = tqdm(total=artists_list.size , desc='Status', position=0)
+inner = tqdm(desc='Getting artist:', position=1, bar_format='{desc}')
 
 for artist in artists_list["artists_names"]:
     time.sleep(2)
@@ -56,14 +60,15 @@ for artist in artists_list["artists_names"]:
     if search_result:
         json_data = artist_lookup(search_result)
         clean_filename = re.sub(r"[><:\"?*|\\/]", "",  f'{artist}.json')
+        outer.update(1)
         with open(os.path.join(download_path,clean_filename), 'w') as outfile:
             json.dump(json_data, outfile)
         try:
-            print(f"found artist: {artist}, site_name: {json_data['name']}, country: {json_data['country']}")
+            inner.set_description_str(f"found artist: {artist}, site_name: {json_data['name']}, country: {json_data['country']}")
         except:
-            print(f"found artist: {artist}, but no other data")
+            inner.set_description_str(f"found artist or group : {artist}")
     else:
-        print(f"artist {artist} not found")
+        inner.set_description_str(f"artist {artist} not found")
 
 LOOKUP_SESSION.close()
 BRAINZ_SESSION.close()

@@ -13,7 +13,7 @@ from requests.exceptions import Timeout
 from tqdm import tqdm
 
 
-UNIQUE_SONG_PATH = "../../../analysis/lyrics/songlyrics/defective_cluster.csv"
+UNIQUE_SONG_PATH = "../../../analysis/lyrics/songlyrics/songs_na_less_5.csv"
 DOWNLOAD_DIR = "lyrics"
 curr_row = 0
 

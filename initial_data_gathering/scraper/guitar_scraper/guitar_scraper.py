@@ -60,12 +60,24 @@ def search_song(driver, artist_and_song):
     print(artist_and_song)
     query_string = ENDPOINT + QUERY_PARAMS + artist_and_song
     get_page(driver, query_string)
-    return BeautifulSoup(driver.find_element_by_tag_name('body').text, 'html.parser')
+    return driver.find_element_by_tag_name('body')
 
-def evaulate_query()
+def evaulate_query(body):
+    tabs = body.find_elements_by_xpath("//article/div/div[//a]")
+    parsed = [BeautifulSoup(tab.text, "html.parser") for tab in tabs]
+    for i in parsed:
+        spans = i.findAll("span")
+        for span in spans:
+            if span.has_attr('data-tip'):
+                print(i.text)
+    return [BeautifulSoup(tab.text, "html.parser") for tab in tabs]
 
 
-artists = pd.read_csv("unique_songs_v2.csv", sep=";")
+#/html/body//article/div//header//a
+#divs with a links : //article/div/div[//a]
+
+
+artists = pd.read_csv("unique_songs_with_feats_4.csv", sep=";")
 found = 0
 not_found = 0
 
@@ -74,7 +86,10 @@ pairs = []
 html_reg_repl = re.compile(r"\s")
 
 
+
+
 test = "https://tabs.ultimate-guitar.com/tab/ed-sheeran/perfect-chords-1956589"
-#pag = get_html(driver, test)
-#print(getnotes(pag))
+pag = search_song(driver, "wish you were here")
+tabs = evaulate_query(pag)
+
 #driver.close()
