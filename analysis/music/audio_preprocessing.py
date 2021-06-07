@@ -21,7 +21,7 @@ import numpy as np
 
 warnings.filterwarnings("ignore")
 
-DATA_DIR = "./music_data/"
+DATA_DIR = "/home/giuseppe/Documents/Master/progetto/analysis/music/music_data"
 OUTPUT_DIR = "preprocessed_data/"
 
 
@@ -82,6 +82,17 @@ def padder(array: np.array, num_missing_items: int,
     raise ValueError("Only 'left' or 'right' are accepted as arguments")
 
 
+def mel_log_spectrogram_extractor(signal_array: np.array,
+                                  s_r: int = 22050) -> np.array:
+    """
+    log_spectrogram_extractor extract log spectrograms in Db from a time
+    series signal
+    """
+    mel_ps = librosa.feature.melspectrogram(y=signal_array, sr=s_r)
+    ps_db = librosa.power_to_db(mel_ps, ref=np.max)
+    return ps_db
+
+
 def log_spectrogram_extractor(signal_array: np.array,
                               frame_size: int = 512,
                               hop_length: int = 256) -> np.array:
@@ -113,11 +124,10 @@ if __name__ == '__main__':
     FRAME_SIZE = 512
     HOP_LENGTH = 256
     SAMPLE_RATE = 22050
-    DURATION = 10
+    DURATION = 30
     # loop over all the mp3 in the folder
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
-
 
     for file in tqdm(os.listdir(DATA_DIR)):
         file_path = os.path.join(DATA_DIR, file)
@@ -130,13 +140,10 @@ if __name__ == '__main__':
             n_missing_samples = N_EXPECT_SAMPLES - len(signal)
             signal = padder(signal, n_missing_samples, how="right")
 
-        signal = mfcc_extractor(signal,
-                                frame_size=FRAME_SIZE,
-                                hop_length=HOP_LENGTH)
-                # normalize the array
+        signal = mel_log_spectrogram_extractor(signal, s_r=SAMPLE_RATE)
+        # normalize the array
         signal = minmax_normalizer(signal)
         # save to file using numpy
         output_name = os.path.join(OUTPUT_DIR, file[:-4] + ".npy")
         with open(output_name, "wb") as saver_handler:
             np.save(saver_handler, signal)
-
