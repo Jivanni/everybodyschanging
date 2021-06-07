@@ -10,6 +10,13 @@
 *.html
 *.mp3
 test*
+analysis/music/preprocessed_data/*
+*.zip
+*.npy
+*.h5
+*.pb
+*.mp4
+*.gif
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
