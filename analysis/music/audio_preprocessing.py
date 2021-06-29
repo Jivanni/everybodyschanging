@@ -124,15 +124,24 @@ if __name__ == '__main__':
     FRAME_SIZE = 512
     HOP_LENGTH = 256
     SAMPLE_RATE = 22050
-    DURATION = 30
+    DURATION = 10
     # loop over all the mp3 in the folder
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
 
     for file in tqdm(os.listdir(DATA_DIR)):
         file_path = os.path.join(DATA_DIR, file)
+        output_name = os.path.join(OUTPUT_DIR, file[:-4] + ".npy")
+        if os.path.exists(output_name):
+            continue
         # load the mp3 with librosa
-        signal = loader(file_path, s_r=SAMPLE_RATE, length_in_s=DURATION)
+
+        try:
+            signal = loader(file_path, s_r=SAMPLE_RATE, length_in_s=DURATION)
+        except EOFError as e:
+            print(e)
+            print(f"could not process {file_path}")
+            continue
 
         N_EXPECT_SAMPLES = int(SAMPLE_RATE * DURATION)
         # if the song is shorter than 30 seconds pad the end
@@ -144,6 +153,5 @@ if __name__ == '__main__':
         # normalize the array
         signal = minmax_normalizer(signal)
         # save to file using numpy
-        output_name = os.path.join(OUTPUT_DIR, file[:-4] + ".npy")
         with open(output_name, "wb") as saver_handler:
             np.save(saver_handler, signal)

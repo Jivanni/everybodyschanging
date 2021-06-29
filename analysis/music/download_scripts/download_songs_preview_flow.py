@@ -25,8 +25,8 @@ logging.basicConfig(format='%(levelname)s\t%(message)s',
                     filemode="w",
                     level=logging.INFO)
 
-DATA_PATH = "../../../data/cleaned_df_v2.csv"
-DOWNLOAD_FOLDER = "../preview_download"
+DATA_PATH = "../../../data/combined_df_final.csv"
+DOWNLOAD_FOLDER = "../music_data"
 
 def get_spotify_keys(path: str = "./spotify_keys.txt") -> Optional[Dict[str,
                                                                         str]]:
