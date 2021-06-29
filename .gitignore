@@ -15,6 +15,7 @@ analysis/music/preprocessed_data/*
 *.npy
 *.pb
 *.mp4
+*.h5
 *.gif
 *.pub
 *.png
