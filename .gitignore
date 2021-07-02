@@ -164,3 +164,4 @@ scraper/guitar_scraper/user/
 analysis/lyrics/songlyrics/lyrics.zip
 analysis/lyrics/fastext_models/lid.176.bin
 analysis/lyrics/fastext_models/lid.176.bin
+analysis/lyrics/altair.ipynb
