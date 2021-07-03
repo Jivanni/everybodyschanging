@@ -1,4 +1,4 @@
-
+.jivianrc
 .idea/workspace.xml
 .idea/csv-plugin.xml
 .idea/workspace.xml
@@ -8,7 +8,17 @@
 *.log
 *.json
 *.html
+*.mp3
 test*
+analysis/music/preprocessed_data/*
+*.zip
+*.npy
+*.pb
+*.mp4
+*.h5
+*.gif
+*.pub
+*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
