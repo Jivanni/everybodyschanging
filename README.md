@@ -1,18 +1,15 @@
-# Progettone Master in Big Data \& Social Mining
+# Progettone Master in Big Data \& Social Mining - Gruppo 5
 
-## Gather data
+## Struttura della repository
 
-### Scraping
-We built a scraper to parse the top 100 charts from the Fondazione Industria Musicale Italiana.
-We also built functions that uses spotify to gather information about each song.
-
-We scraped from 2006 to 2021, are found 6,784 unique songs, of which 195 cannot be found automatically on Spotify.
-
-Some weeks could not be retrieved from the site.
-Are missing the first 17 weeks from 2006, 2 weeks from 2008, 4 weeks from 2009, 8 weeks from 2010 and 3 weeks from 2011 and the last weeks from 2021 (our scraper cannot scrape the future sadly).
-
-### Clean data
-We saw that a lot of songs that the api found were wrong using difflib. Therefore, we manually found the right spotify ID and replace them
-
-### Music analysis
-Missing 68 songs of 5840
+- analysis: in questa cartella vi sono le analisi salienti del progetto
+    - Lyrics: analisi dei testi delle canzoni
+    - Music: analisi dei brani musicali con _Deep Learning_
+    - Timeseries: analisi delle metriche di Spotify nel tempo
+    - Artists: script per creare il grafo delle collaborazioni
+- data: in questa cartella vi erano i dati con i quali abbiamo fatto le varie analisi (ora è tutto su Drive)
+    - check\_data\_utils: in questa cartella ci sono gli script usati per controllare la qualità del dataset e per pulire il dataset principale
+- initial\_data\_gathering: script utilizzati per scaricare i dati
+    - scraper: cartella con gli script degli scraper
+    - spotify\_info: script usati per integrare i dati da Spotify
+- altair\_notebooks: notebook utilizzati per generare le visualizzazioni con Altair
