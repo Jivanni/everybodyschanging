@@ -11,6 +11,10 @@
     - check\_data\_utils: in questa cartella ci sono gli script usati per controllare la qualità del dataset e per pulire il dataset principale
 - initial\_data\_gathering: script utilizzati per scaricare i dati
     - scraper: cartella con gli script degli scraper
+        - fimi_scaper: scraper per le top chart della FIMI
+        - genius: scraper per le lyrics di Genius
+        - google: scaper accessorio per ottenere lyrics direttamente da google
+        - music_brainz: wrapper per API di musicbrainz.org, un database di informazioni su artisti
     - spotify\_info: script usati per integrare i dati da Spotify
 - altair\_notebooks: notebook utilizzati per generare le visualizzazioni con Altair
 
